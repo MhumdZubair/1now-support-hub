@@ -1,0 +1,1095 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>1Now Support Hub</title>
+<style>
+:root{--blue:#2563EB;--blue-d:#1D4ED8;--blue-s:#EFF5FF;--slate:#0F172A;--ink:#1E293B;--mut:#5B6779;--line:#E2E8F0;--bg:#F6F8FB;--card:#fff;
+--green:#166534;--green-s:#DCFCE7;--red:#B91C1C;--red-s:#FEE2E2;--amber:#92400E;--amber-s:#FEF3C7;--gray-s:#EEF2F7}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+header{background:var(--slate);color:#fff;position:sticky;top:0;z-index:20}
+.bar{max-width:1180px;margin:0 auto;padding:10px 16px;display:flex;align-items:center;gap:12px 24px;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:10px;font-weight:700;font-size:16px}
+.logo{background:var(--blue);border-radius:8px;padding:3px 9px;font-weight:800}
+nav{display:flex;gap:4px;flex:1}
+nav button{background:none;border:0;color:#CBD5E1;padding:8px 14px;border-radius:8px;font:inherit;font-weight:600;cursor:pointer}
+nav button:hover{background:#1E293B;color:#fff}
+nav button.on{background:var(--blue);color:#fff}
+.count{background:rgba(255,255,255,.2);border-radius:99px;padding:0 7px;font-size:12px;margin-left:5px}
+main{max-width:1180px;margin:0 auto;padding:22px 16px 60px}
+h1{font-size:22px;margin:0 0 2px}h2{font-size:15px;margin:0 0 12px}
+.sub{color:var(--mut);margin:0 0 18px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px;margin-bottom:16px;box-shadow:0 1px 2px rgba(15,23,42,.04)}
+.cols{display:grid;grid-template-columns:minmax(0,1.7fr) minmax(0,1fr);gap:16px;align-items:start}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+label{display:block;font-weight:600;font-size:13px;margin-bottom:4px}
+.field{margin-bottom:12px;min-width:0}
+input,select,textarea{width:100%;font:inherit;color:inherit;background:#fff;border:1px solid #CBD5E1;border-radius:8px;padding:9px 11px}
+textarea{resize:vertical;min-height:92px}
+input:focus,select:focus,textarea:focus,button:focus-visible,tr:focus-visible{outline:2px solid var(--blue);outline-offset:1px}
+input:disabled,select:disabled{background:var(--gray-s);color:var(--mut)}
+.invalid{border-color:var(--red);background:#FFF8F8}
+.hint{color:var(--mut);font-size:12.5px;margin-top:4px}
+.err{color:var(--red);font-weight:600;margin:0 0 10px}
+.btn{font:inherit;font-weight:600;border:1px solid #CBD5E1;background:#fff;color:var(--ink);border-radius:8px;padding:9px 14px;cursor:pointer}
+.btn:hover:not(:disabled){border-color:var(--blue);color:var(--blue)}
+.btn.primary{background:var(--blue);border-color:var(--blue);color:#fff}
+.btn.primary:hover:not(:disabled){background:var(--blue-d);color:#fff}
+.btn.good{background:#15803D;border-color:#15803D;color:#fff}
+.btn.good:hover:not(:disabled){background:#166534;color:#fff}
+.btn.ghost{background:transparent;color:#E2E8F0;border-color:#475569}
+.btn.ghost:hover{color:#fff;border-color:#fff}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.chip,.pill{font:inherit;font-size:12.5px;border:1px solid var(--line);background:#fff;border-radius:99px;padding:5px 12px;cursor:pointer;color:var(--ink)}
+.chip:hover,.pill:hover{border-color:var(--blue);color:var(--blue)}
+.pill.on{background:var(--blue);border-color:var(--blue);color:#fff}
+.step{display:inline-grid;place-items:center;width:22px;height:22px;border-radius:50%;background:var(--blue);color:#fff;font-size:12px;margin-right:8px}
+.badge{display:inline-block;border-radius:99px;padding:2px 10px;font-size:12px;font-weight:700;white-space:nowrap}
+.b-gray{background:var(--gray-s);color:#334155}.b-blue{background:#DBEAFE;color:#1E40AF}.b-green{background:var(--green-s);color:var(--green)}
+.b-red{background:var(--red-s);color:var(--red)}.b-amber{background:var(--amber-s);color:var(--amber)}
+.box{border-radius:10px;padding:12px 14px;border:1px solid var(--line);background:var(--bg);margin:12px 0;overflow-wrap:anywhere}
+.box.green{background:#F0FDF4;border-color:#86EFAC}.box.red{background:#FEF2F2;border-color:#FCA5A5}.box.amber{background:#FFFBEB;border-color:#FCD34D}.box.blue{background:var(--blue-s);border-color:#BFDBFE}
+.box strong.big{display:block;font-size:15px}
+dl{display:grid;grid-template-columns:auto 1fr;gap:5px 14px;margin:0}dt{color:var(--mut)}dd{margin:0;font-weight:600;text-align:right;overflow-wrap:anywhere}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:16px}
+.kpi{background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px 16px;text-align:left;font:inherit;cursor:pointer;color:inherit}
+.kpi:hover,.kpi.on{border-color:var(--blue);box-shadow:0 0 0 1px var(--blue)}
+.kpi b{display:block;font-size:28px;line-height:1.2}.kpi span{color:var(--mut);font-weight:600;font-size:13px}
+table{width:100%;border-collapse:collapse}
+th{text-align:left;font-size:12px;color:var(--mut);padding:9px 10px;border-bottom:1px solid var(--line)}
+td{padding:11px 10px;border-bottom:1px solid var(--line);vertical-align:middle}
+tbody tr{cursor:pointer}tbody tr:hover{background:var(--blue-s)}
+td small{display:block;color:var(--mut)}
+.empty{text-align:center;color:var(--mut);padding:30px 10px}
+.ai{background:linear-gradient(100deg,#0F172A,#1E3A8A);color:#fff;border-radius:12px;padding:14px 18px;margin-bottom:16px;display:grid;grid-template-columns:1fr 1fr 2fr;gap:12px 18px}
+.ai-title{grid-column:1/-1;font-weight:700}.ai-title small{font-weight:400;color:#BFDBFE;margin-left:8px}
+.ai span{display:block;font-size:12px;color:#BFDBFE}.ai b{display:block;overflow-wrap:anywhere}
+.timeline{display:grid;grid-template-columns:repeat(4,1fr);list-style:none;padding:0;margin:0}
+.timeline li{text-align:center;position:relative;font-size:12.5px;color:var(--mut);font-weight:600}
+.timeline li:before{content:attr(data-n);display:grid;place-items:center;width:28px;height:28px;border-radius:50%;margin:0 auto 6px;background:#fff;border:2px solid #CBD5E1;position:relative;z-index:1}
+.timeline li:after{content:"";position:absolute;top:13px;right:50%;width:100%;height:2px;background:#CBD5E1}
+.timeline li:first-child:after{display:none}
+.timeline li.done{color:var(--ink)}.timeline li.done:before{content:"✓";background:var(--blue);border-color:var(--blue);color:#fff}
+.timeline li.done:after{background:var(--blue)}
+.timeline li small{display:block;font-weight:400;color:var(--mut)}
+.log{list-style:none;margin:0;padding:0;max-height:260px;overflow:auto}
+.log li{padding:7px 0;border-bottom:1px dashed var(--line)}.log time{display:block;font-size:12px;color:var(--mut)}
+#msg{min-height:230px;background:var(--bg);font-size:13.5px}
+.code{font:700 24px ui-monospace,Menlo,Consolas,monospace;letter-spacing:4px}
+.claim h3{font-size:13px;margin:0 0 8px}.flag{display:block;font-size:12px;font-weight:700;color:var(--red);margin-top:3px}.flag.warn{color:var(--amber)}
+.stages{display:flex;flex-wrap:wrap;gap:6px;margin:14px 0 4px}.stages span{font-size:12px;font-weight:600;border-radius:99px;padding:3px 10px;background:var(--gray-s);color:var(--mut)}.stages span.done{background:var(--green-s);color:var(--green)}.stages span.now{background:var(--blue);color:#fff}
+.photos{display:grid;grid-template-columns:1fr 1fr;gap:12px}.photos img{width:100%;border-radius:8px;border:1px solid var(--line);display:block;margin-bottom:6px}.ph{border:1px dashed #CBD5E1;border-radius:8px;padding:22px 8px;text-align:center;color:var(--mut);margin-bottom:6px}
+details.sec{border-top:1px solid var(--line);padding:10px 0}details.sec summary{cursor:pointer;font-weight:700}details.sec>div{padding-top:10px}.check{list-style:none;padding:0;margin:0}.check li{padding:3px 0}
+.money{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px}.money div{background:var(--bg);border-radius:8px;padding:10px}.money b{display:block;font-size:20px}.money span{font-size:12px;color:var(--mut)}
+#m-reason-wrap{margin-bottom:12px}
+.assist{margin:0 0 12px}.assist ol{margin:6px 0 0;padding-left:20px}.assist ul{margin:6px 0 10px;padding-left:20px}
+.ai .go{grid-column:1/-1;display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.toast{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);background:var(--slate);color:#fff;padding:10px 18px;border-radius:10px;box-shadow:0 8px 24px rgba(0,0,0,.25);z-index:50;max-width:92vw}
+.overlay{position:fixed;inset:0;background:rgba(15,23,42,.55);display:grid;place-items:center;z-index:40;padding:16px}
+.overlay .card{max-width:420px;margin:0}
+[hidden]{display:none!important}
+@media(max-width:860px){.cols,.ai{grid-template-columns:1fr}.kpis{grid-template-columns:1fr 1fr}}
+@media(max-width:640px){
+header{position:static}nav{order:3;flex-basis:100%}nav button{flex:1;padding:8px 4px;font-size:13px}.bar .btn{margin-left:auto}
+.grid2,.grid3{grid-template-columns:1fr}
+thead{display:none}table,tbody,tr,td{display:block;width:100%}
+tr{border:1px solid var(--line);border-radius:10px;margin-bottom:10px;padding:6px 4px}
+td{border:0;padding:4px 10px;display:flex;justify-content:space-between;gap:12px;text-align:right}
+td:before{content:attr(data-l);color:var(--mut);font-size:12px;text-align:left}
+}
+</style>
+</head>
+<body>
+<header><div class="bar">
+  <div class="brand"><span class="logo">1Now</span> Support Hub</div>
+  <nav aria-label="Screens">
+    <button data-tab="new">New Request</button>
+    <button data-tab="queue">Operator Queue<span class="count" id="openCount">0</span></button>
+    <button data-tab="resolver">Resolver</button>
+  </nav>
+  <button class="btn ghost" data-act="reset">Reset Demo Data</button>
+</div></header>
+
+<main>
+<!-- NEW REQUEST -->
+<section id="screen-new">
+  <h1>New support request</h1>
+  <p class="sub">Three quick steps. Fields marked * are required. To try it fast, tap an example.</p>
+  <div class="card">
+    <h2>Try an example</h2>
+    <div class="row" id="presets"></div>
+  </div>
+  <div class="cols">
+    <form id="form" class="card" novalidate>
+      <h2><span class="step">1</span>Customer and booking</h2>
+      <div class="field"><label for="f-booking">Select booking *</label><select id="f-booking"></select></div>
+      <div id="manual" class="box blue" hidden>
+        <div class="grid3">
+          <div class="field"><label for="f-vehicle">Vehicle *</label><input id="f-vehicle" placeholder="e.g. Suzuki Swift" maxlength="50"></div>
+          <div class="field"><label for="f-deposit">Deposit hold ($) *</label><input id="f-deposit" type="number" min="150" step="1" value="250"></div>
+          <div class="field"><label for="f-sync">Turo sync</label><select id="f-sync"><option>Active</option><option>Lag Detected</option></select></div>
+        </div>
+        <div class="hint">A booking number is assigned when you submit. Minimum deposit is $150.</div>
+      </div>
+      <div class="field"><label for="f-name">Customer name *</label><input id="f-name" placeholder="Type the customer's full name" maxlength="60" autocomplete="off"><div class="hint">Filled in from the booking. You can change it.</div></div>
+      <div class="grid2">
+        <div class="field"><label for="f-phone">Phone (optional)</label><input id="f-phone" type="tel" maxlength="30"></div>
+        <div class="field"><label for="f-email">Email (optional)</label><input id="f-email" type="email" maxlength="80"></div>
+      </div>
+
+      <h2 style="margin-top:12px"><span class="step">2</span>What went wrong?</h2>
+      <div class="field"><label for="f-type">Problem type *</label><select id="f-type"></select><div class="hint" id="typeHelp"></div></div>
+      <div class="field"><label for="f-desc">Description *</label><textarea id="f-desc" maxlength="1000" placeholder="Tell us what happened, in your own words"></textarea></div>
+      <div class="box blue assist" id="assist" aria-live="polite"></div>
+
+      <div id="cond-damage" class="box" hidden>
+        <h2><span class="step">3</span>Damage details</h2>
+        <div class="grid3">
+          <div class="field"><label for="f-amount">Damage amount ($) *</label><input id="f-amount" type="number" min="0.01" step="0.01"></div>
+          <div class="field"><label for="f-photos">Has before/after photos?</label><select id="f-photos"><option value="">Choose…</option><option>Yes</option><option>No</option></select></div>
+          <div class="field"><label for="f-disputes">Renter disputes?</label><select id="f-disputes"><option value="">Choose…</option><option>No</option><option>Yes</option></select></div>
+        </div>
+        <div class="field"><label for="f-hold">When was the deposit hold placed?</label><select id="f-hold"><option value="0">Today</option><option value="1">1 day ago</option><option value="4">4 days ago (expires soon)</option><option value="6">6 days ago (expired)</option></select><div class="hint">This demo assumes a card hold lasts 5 days. Real limits depend on the card and payment provider.</div></div>
+      </div>
+      <div id="cond-sync" class="box" hidden>
+        <h2><span class="step">3</span>Conflict details</h2>
+        <div class="grid2">
+          <div class="field"><label for="f-source">Conflicting source</label><select id="f-source"><option>Turo Booking Overlap</option><option>Calendar Sync Lag</option></select></div>
+          <div class="field"><label for="f-backup">Backup vehicle available?</label><select id="f-backup"><option>Yes</option><option>No</option></select></div>
+        </div>
+      </div>
+
+      <p class="err" id="formErr" role="alert" hidden></p>
+      <div class="row">
+        <button type="submit" class="btn primary">Submit request →</button>
+        <button type="button" class="btn" data-act="clear">Clear form</button>
+      </div>
+    </form>
+    <aside>
+      <div class="card"><h2>Booking summary</h2><div id="summary"></div></div>
+      <div class="card"><h2>What happens next</h2><div id="preview"></div></div>
+    </aside>
+  </div>
+</section>
+
+<!-- QUEUE -->
+<section id="screen-queue" hidden>
+  <h1>Operator queue</h1>
+  <p class="sub">Select a summary card or filter, then click any ticket to open it.</p>
+  <div class="kpis" id="kpis"></div>
+  <div class="card"><h2>Damage claims overview</h2><div class="money" id="claimStats"></div></div>
+  <div class="card">
+    <div class="grid2" style="margin-bottom:12px">
+      <input id="search" type="search" placeholder="Search ticket, customer, car, booking or problem" aria-label="Search tickets">
+      <div class="row" style="justify-content:flex-end"><button class="btn" data-act="clearFilters">Clear filters</button><button class="btn primary" data-act="goNew">+ New request</button></div>
+    </div>
+    <div class="row" id="pills" style="margin-bottom:12px"></div>
+    <label class="row" style="font-weight:600;margin-bottom:8px"><input type="checkbox" id="attention" style="width:auto"> Needs attention first (expiring holds, overdue replies, unpaid balances)</label>
+    <table>
+      <thead><tr><th>Ticket ID</th><th>Booking</th><th>Problem</th><th>Status</th><th>Priority</th></tr></thead>
+      <tbody id="rows"></tbody>
+    </table>
+    <div class="empty" id="noRows" hidden>No tickets match. Try “Clear filters”.</div>
+  </div>
+</section>
+
+<!-- RESOLVER -->
+<section id="screen-resolver" hidden>
+  <div class="row" style="justify-content:space-between;margin-bottom:14px">
+    <div><h1 id="r-title">Resolver</h1><div id="r-sub" class="sub" style="margin:0"></div></div>
+    <div class="row"><select id="r-pick" aria-label="Switch ticket" style="width:auto;max-width:92vw"></select><button class="btn" data-act="goQueue">← Queue</button></div>
+  </div>
+  <div id="r-body">
+    <div class="ai" id="r-ai"></div>
+    <div class="card"><h2>Progress timeline</h2><ol class="timeline" id="r-timeline"></ol></div>
+    <div class="cols">
+      <div>
+        <div class="card"><h2>Smart triage</h2><div id="r-inputs"></div><div id="r-out"></div></div>
+        <div class="card" id="r-extra-card"><h2>Claim toolkit</h2><div id="r-extra"></div></div>
+        <div class="card"><h2>Finish ticket</h2><div id="r-finish"></div></div>
+        <div class="card"><h2>Request details</h2><div id="r-details"></div></div>
+      </div>
+      <div>
+        <div class="card"><h2>Message to Renter</h2><textarea id="msg" readonly aria-label="Message to renter"></textarea>
+          <div class="row" style="margin-top:10px"><button class="btn primary" data-act="copy">Copy Message</button><button class="btn" data-act="recordSent">Record as Sent</button><span class="hint">Updates automatically</span></div></div>
+        <div class="card"><h2>Activity log</h2><ul class="log" id="r-log"></ul></div>
+      </div>
+    </div>
+  </div>
+  <div class="card empty" id="r-empty" hidden>No ticket selected. Open one from the queue or create a new request.</div>
+</section>
+<p class="hint">Demo workspace: sample data only. Unlocks, payments, messages, calendar sync and Carisma AI suggestions are simulated with built-in rules. Nothing is sent or charged. Data stays in this browser.</p>
+</main>
+
+<div class="overlay" id="modal" hidden><div class="card" role="dialog" aria-modal="true" aria-labelledby="m-title">
+  <h2 id="m-title"></h2><p id="m-text"></p>
+  <div id="m-reason-wrap" hidden><label for="m-reason">Reason *</label><input id="m-reason" maxlength="200"><p class="err" id="m-err" role="alert" hidden>Please enter a reason.</p></div>
+  <div class="row" style="justify-content:flex-end"><button class="btn" data-act="modalNo">Cancel</button><button class="btn primary" data-act="modalYes" id="m-yes">Confirm</button></div>
+</div></div>
+<div class="toast" id="toast" role="status" hidden></div>
+
+<script>
+"use strict";
+const KEY='onenow_support_hub_v2';
+const DAY=86400000, HOLD_DAYS=5, REPLY_HOURS=48, MAX_REMINDERS=2;
+const $=id=>document.getElementById(id);
+const esc=v=>String(v==null?'':v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const money=n=>'$'+(Number(n)||0).toLocaleString('en-US',{minimumFractionDigits:Number.isInteger(Number(n))?0:2,maximumFractionDigits:2});
+
+/* ---------- sample data ---------- */
+const BOOKINGS=[
+ ['1023','Toyota Camry','Ali Raza',250,'Active'],
+ ['1024','Honda Civic','Sara Khan',250,'Active'],
+ ['1025','Kia Sportage','Ahmed Malik',300,'Lag Detected'],
+ ['1026','Hyundai Tucson','Fatima Noor',300,'Active'],
+ ['1027','Toyota Corolla','Usman Tariq',200,'Active'],
+ ['1028','Tesla Model 3','Ayesha Siddiqui',500,'Active'],
+ ['1029','Nissan Altima','Bilal Hussain',250,'Lag Detected'],
+ ['1030','Jeep Wrangler','Maria Gomez',400,'Active'],
+ ['1031','Ford Escape','James Carter',300,'Active'],
+ ['1032','Mazda CX-5','Hina Sheikh',300,'Active']
+].map((b,i)=>({id:b[0],vehicle:b[1],name:b[2],deposit:b[3],sync:b[4],phone:'(555) 010-'+String(23+i).padStart(4,'0'),email:b[2].toLowerCase().replace(/\s+/g,'.')+'@example.com'}));
+
+const TYPES={
+ damage:['Damage Claim','Scratches, dents or other damage found on the car.'],
+ lockout:['Lockout Mid-Rental','The renter cannot get into the car during the trip.'],
+ payment:['Payment Failed','A rental charge did not go through.'],
+ late:['Late Return / Over-Mileage','The car came back late or went over the mileage limit.'],
+ verify:['Verification Failed','The ID or insurance check did not pass.'],
+ sync:['Turo Sync / Double-Booking Conflict','The same car appears booked twice, or calendars do not match.']
+};
+
+const PRESETS=[
+ ['Minor scratch','1023','damage','Small scratch on the rear bumper found at return. Before and after photos attached.',{amount:90,photos:'Yes',disputes:'No'}],
+ ['Large dent','1026','damage','Deep dent on the passenger door. Photos show it was not there at pickup.',{amount:640,photos:'Yes',disputes:'No'}],
+ ['Damage, no photos','1027','damage','Cleaner reported a cracked mirror, but no photos were taken.',{amount:180,photos:'No',disputes:'No'}],
+ ['Disputed damage','1024','damage','Wheel rim is scraped. Renter says it happened before pickup.',{amount:220,photos:'Yes',disputes:'Yes'}],
+ ['Locked out','1024','lockout','Renter is locked out at the airport parking lot. Phone key is not responding.',{}],
+ ['Card declined','1028','payment','The trip extension payment was declined.',{}],
+ ['Late return','1030','late','Car returned late and over the included mileage.',{}],
+ ['ID check failed','1031','verify','Driver license photo was blurry and the insurance card has expired.',{}],
+ ['Double booking (backup)','1029','sync','A Turo trip overlaps a direct booking for the same dates.',{source:'Turo Booking Overlap',backup:'Yes'}],
+ ['Sync lag (no backup)','1025','sync','Direct booking did not block the Turo calendar in time.',{source:'Calendar Sync Lag',backup:'No'}],
+ ['Claim above deposit, hold expiring','1032','damage','Front bumper and headlight broken. Photos taken at pickup and return.',{amount:850,photos:'Yes',disputes:'No',hold:'4'}],
+ ['Claim after hold expired','1028','damage','Deep scratch reported late. Photos are on file.',{amount:130,photos:'Yes',disputes:'No',hold:'6'}]
+];
+
+/* ---------- state ---------- */
+let state, storageOK=true, currentId=null, tab='new', filter='All', query='', generation=0;
+const pending={};
+
+function save(){try{localStorage.setItem(KEY,JSON.stringify(state));return true;}catch(e){if(storageOK){storageOK=false;toast('Could not save in this browser (storage blocked or full). Changes may be lost on reload.');}return false;}}
+const ticket=id=>state.tickets.find(t=>t.id===id);
+const cur=()=>ticket(currentId);
+const now=()=>Date.now();
+function log(t,text,at){t.log.push({at:at||now(),text});}
+
+function makeTicket(data,at){
+ const t=Object.assign({id:'TKT-'+(state.nextTicket++),created:at,holdAt:at,status:'New',priority:'Medium',stages:{created:at,triaged:at,action:null,resolved:null},log:[],f:{},w:{},phone:'',email:''},data);
+ t.f=Object.assign(defaultsFor(t.type),data.f||{});
+ t.w=Object.assign({sim:'success'},data.w||{});
+ log(t,'Ticket created for '+t.customer+' (booking #'+t.bookingId+').',at);
+ retriage(t);
+ log(t,'Triaged: '+decision(t).title,at);
+ return t;
+}
+function defaultsFor(type){
+ if(type==='payment')return{cardOnFile:'Yes',due:120};
+ if(type==='late')return{hours:0,miles:0};
+ if(type==='damage')return{amount:100,photos:'Yes',disputes:'No'};
+ if(type==='sync')return{source:'Turo Booking Overlap',backup:'Yes'};
+ return{};
+}
+function seed(){
+ state={nextTicket:2001,nextBooking:1033,tickets:[]};
+ const H=3600000, base=now();
+ const add=(bid,type,desc,f,hoursAgo,w)=>{const b=BOOKINGS.find(x=>x.id===bid);
+  const t=makeTicket({bookingId:b.id,customer:b.name,vehicle:b.vehicle,deposit:b.deposit,sync:b.sync,phone:b.phone,email:b.email,type,desc,f,w},base-hoursAgo*H);
+  state.tickets.push(t);return t;};
+ const done=(t,note)=>{const at=t.created+H/2;t.w.done=true;t.stages.action=at;log(t,note,at);t.stages.resolved=at+H/4;t.status='Resolved';log(t,'Marked as Resolved.',at+H/4);};
+ const small=add('1031','damage','Light scuff on the front bumper.',{amount:85,photos:'Yes',disputes:'No'},50);
+ settle(small,85);small.stages.action=small.created+H/2;small.log[small.log.length-1].at=small.stages.action;small.stages.resolved=small.stages.action+H/4;small.status='Resolved';log(small,'Marked as Resolved.',small.stages.resolved);
+ done(add('1032','late','Returned 2 hours late with 40 extra miles.',{hours:2,miles:40},30),'Applied extra charge of $50 (demo).');
+ const v=add('1030','verify','Insurance card has expired.',{},20);v.status='Awaiting Documents';v.stages.action=v.created+H/6;v.w.requested=true;log(v,'Requested new ID and insurance documents.',v.stages.action);
+ add('1028','payment','Extension payment was declined.',{cardOnFile:'No',due:185},9);
+ const big=add('1026','damage','Deep dent on the passenger door found at return.',{amount:640,photos:'Yes',disputes:'No'},7);
+ big.holdAt=base-3.5*DAY;big.w.claim='INS-4821';big.stages.action=base-6*H;log(big,'Sent to insurance review, ref INS-4821 (demo).',big.stages.action);
+ add('1027','late','Renter returned the car after the agreed time.',{hours:3,miles:62},5);
+ add('1025','sync','Direct booking and Turo trip overlap on the same dates.',{source:'Calendar Sync Lag',backup:'No'},3);
+ add('1024','damage','Rim scraped. Renter says the mark was there at pickup.',{amount:220,photos:'Yes',disputes:'Yes'},2);
+ const wait=add('1023','damage','Scratch on the rear door. Photos not uploaded yet.',{amount:120,photos:'No',disputes:'No'},50);
+ Object.assign(wait.w,{requested:true,reminders:0,dueAt:base-2*H});wait.holdAt=base-2.2*DAY;wait.stages.action=base-50*H;log(wait,'Photo request prepared for the renter (demo).',wait.stages.action);
+ add('1023','damage','Small chip on the front bumper. Photos on file.',{amount:95,photos:'Yes',disputes:'No'},4);
+ add('1029','lockout','Renter is locked out at a shopping mall.',{},.3);
+ save();
+}
+function load(){
+ try{const s=JSON.parse(localStorage.getItem(KEY));
+  if(s&&Array.isArray(s.tickets)&&s.tickets.every(t=>t&&TYPES[t.type]&&t.stages&&t.f&&t.w&&Array.isArray(t.log))){state=s;return;}
+ }catch(e){}
+ seed();
+}
+
+/* ---------- damage claim lifecycle ---------- */
+const cents=n=>Math.round(n*100)/100;
+const holdLeft=t=>t.holdAt+HOLD_DAYS*DAY-now();
+const span=ms=>{const h=Math.max(1,Math.ceil(ms/3600000));return h>=48?Math.floor(h/24)+' days':h+(h===1?' hour':' hours');};
+const overdue=t=>!!(t.w.requested&&t.w.dueAt&&now()>=t.w.dueAt);
+const inReview=t=>!!(t.w.caseId||t.w.claim);
+/* one booking has one hold: once another claim captured or released it, it is gone */
+const sameBooking=t=>state.tickets.filter(x=>x!==t&&x.id!==t.id&&x.type==='damage'&&x.bookingId===t.bookingId);
+const usedBy=t=>sameBooking(t).find(x=>x.w.settle&&x.w.settle.live);
+const holdLive=t=>holdLeft(t)>0&&!usedBy(t);
+const appealOpen=t=>!!(t.w.appeal&&t.w.appeal.status!=='closed');
+/* what would happen if the renter owes this amount right now */
+function split(t,owed){
+ const live=holdLive(t),captured=live?cents(Math.min(owed,t.deposit)):0;
+ return{owed,captured,released:live?cents(t.deposit-captured):0,balance:cents(owed-captured),live,usedBy:(usedBy(t)||{}).id||null};
+}
+const settleText=x=>(x.captured?'Capture '+money(x.captured)+' from the hold. ':'')+(x.live?(x.released?'The other '+money(x.released)+' is released. ':''):x.usedBy?'The hold for this booking was already used by '+x.usedBy+', so nothing can be captured from it. ':'The hold has expired, so nothing can be captured from it. ')+(x.balance?money(x.balance)+' must be collected separately.':'');
+function settle(t,owed){
+ const x=split(t,owed);
+ t.w.settle=Object.assign(x,{balanceStatus:x.balance>0?'due':'none',at:now()});
+ t.w.done=x.balance===0;
+ const msg=owed===0?(x.live?'Released the '+money(t.deposit)+' hold. Renter owes nothing (demo).':'Renter owes nothing. No hold was available to release.')
+  :'Settled '+money(owed)+': captured '+money(x.captured)+', released '+money(x.released)+', balance '+money(x.balance)+' (demo).';
+ act(t,msg);
+}
+function flag(t){
+ if(t.status==='Resolved'||t.type!=='damage')return null;
+ const w=t.w;
+ if(appealOpen(t))return{text:'Renter appeal open',cls:'warn',rank:4};
+ if(w.settle)return w.settle.balance&&!w.done?{text:money(w.settle.balance)+' balance unpaid',cls:'warn',rank:2}:null;
+ if(usedBy(t))return{text:'Hold already used by '+usedBy(t).id,cls:'warn',rank:3};
+ if(holdLeft(t)<=0)return{text:'Deposit hold expired',cls:'',rank:4};
+ if(holdLeft(t)<=2*DAY)return{text:'Hold expires in '+span(holdLeft(t)),cls:'',rank:5};
+ if(overdue(t))return{text:'Photo reply overdue',cls:'warn',rank:3};
+ return null;
+}
+function claimSummary(t){
+ const w=t.w,x=w.settle;
+ return['DAMAGE CLAIM SUMMARY (demo data)','Ticket: '+t.id+'   Status: '+t.status,'Booking: #'+t.bookingId+' '+t.vehicle,'Renter: '+t.customer,
+ 'Description: '+t.desc,'Claimed amount: '+money(t.f.amount),'Before/after photos: '+t.f.photos+'   Renter disputes: '+t.f.disputes,
+ 'Deposit hold: '+money(t.deposit)+', placed '+when(t.holdAt),'Triage decision: '+decision(t).title,
+ w.claim?'Insurance review ref: '+w.claim:'',w.caseId?'Dispute case: '+w.caseId:'',
+ w.outcome?'Outcome: '+w.outcome.result+', renter owes '+money(w.outcome.owed)+'. Note: '+w.outcome.note:'',
+ x?'Settlement: captured '+money(x.captured)+', released '+money(x.released)+', balance '+money(x.balance)+' ('+x.balanceStatus+')':'',
+ w.closeReason?'Closed early. Reason: '+w.closeReason:'',
+ w.appeal?'Appeal: '+w.appeal.reason+(w.appeal.note?' | Decision: renter owes '+money(w.appeal.newOwed)+', refund '+money(w.appeal.refund)+'. '+w.appeal.note:' | awaiting decision'):'',
+ ...(t.items||[]).map(i=>'Estimate item: '+i.name+' '+money(i.cost)),
+ 'Photo files attached: before '+((t.ev||{}).before?'yes':'no')+', after '+((t.ev||{}).after?'yes':'no'),
+ ...(t.sent||[]).map(m=>'Message recorded as sent '+when(m.at)+':\n'+m.text),'','HISTORY',...t.log.map(l=>when(l.at)+'  '+l.text)].filter((l,i,a)=>l!==''||a[i+1]==='HISTORY').join('\n');
+}
+function claimPanel(t){
+ const w=t.w,d=decision(t),off=t.status==='Resolved',x=w.settle,left=holdLeft(t);
+ const stage=w.done?3:x?2:(w.outcome||d.key==='approve')?2:inReview(t)?1:0;
+ let h='<div class="stages" aria-label="Claim stages">'+['1 Evidence','2 Review and outcome','3 Money settled','4 Close'].map((n,i)=>{const at=off?4:w.done?3:stage;return'<span class="'+(off||i<at?'done':i===at?'now':'')+'">'+n+'</span>';}).join('')+'</div>';
+ if(!x&&usedBy(t))h+=box('red','<b>This booking\'s hold was already used by '+usedBy(t).id+'.</b> It cannot be captured twice. Check this is not the same damage, then collect any amount separately.');
+ else if(!x)h+=left<=0?box('red','<b>Deposit hold expired.</b> It can no longer be captured. Any amount the renter owes must be collected separately.')
+  :box(left<=2*DAY?'amber':'blue','<b>Deposit hold expires in '+span(left)+'</b> ('+when(t.holdAt+HOLD_DAYS*DAY)+').'+(d.key==='dispute'||d.key==='evidence'?' Do not capture while the charge is blocked. If the hold expires first, collect after the decision.':d.key==='insurance'?' If the review takes longer, collect after the decision.':''));
+ if(t.f.amount>t.deposit&&!x)h+=box('amber','The claim is <b>'+money(cents(t.f.amount-t.deposit))+' above</b> the '+money(t.deposit)+' deposit. The hold cannot cover all of it.');
+ if(d.key==='evidence'&&w.requested&&!x){
+  const n=w.reminders||0;
+  h+=box(overdue(t)?'amber':'','<b>'+(overdue(t)?'No reply: follow-up is overdue':'Waiting for photos. Follow up in '+span(w.dueAt-now()))+'</b><div class="hint">Reminders sent: '+n+' of '+MAX_REMINDERS+'</div><div class="row" style="margin-top:8px">'
+  +(!overdue(t)?btn('skipTime','Demo: skip 48 hours','',off):n<MAX_REMINDERS?btn('remind','Send Reminder','primary',off):btn('noEvidence','Drop Claim: No Evidence','primary',off))+'</div>');
+ }
+ if(inReview(t)&&!w.outcome&&!x)h+='<div class="box claim"><h3>Record the final outcome</h3><div class="grid2"><div class="field"><label for="o-result">Outcome</label><select id="o-result"'+(off?' disabled':'')+'><option value="">Choose…</option><option>Approved in full</option><option>Partially approved</option><option>Denied</option></select></div><div class="field"><label for="o-owed">Amount renter owes ($)</label><input id="o-owed" type="number" min="0" step="0.01"'+(off?' disabled':'')+'></div></div><div class="field"><label for="o-note">Reason or reference *</label><input id="o-note" maxlength="200" placeholder="e.g. Adjuster approved the bumper only"'+(off?' disabled':'')+'></div><p class="err" id="o-err" role="alert" hidden></p>'+btn('outcome','Save Outcome','primary',off)+'</div>';
+ if(w.outcome)h+=box(w.outcome.owed?'blue':'green','<b>Outcome: '+esc(w.outcome.result)+'</b>. Renter owes '+money(w.outcome.owed)+'.<div class="hint">'+esc(w.outcome.note)+'</div>');
+ if(w.outcome&&!x)h+=box('','<b>Settlement preview</b><div>'+(w.outcome.owed?esc(settleText(split(t,w.outcome.owed))):(holdLive(t)?'Release the full hold. Nothing is charged.':'Nothing is owed. No hold is available to release.'))+'</div><div class="row" style="margin-top:8px">'+btn('settle',w.outcome.owed?'Settle Claim':'Close Out With No Charge','primary',off)+'</div>');
+ if(x){
+  let b='';
+  if(x.balance){
+   const st={due:'Not requested yet',link:'Payment link sent (simulated)',paid:'Paid (simulated)',writtenoff:'Written off'}[x.balanceStatus];
+   b='<dt>Balance outside hold</dt><dd>'+money(x.balance)+'</dd><dt>Balance status</dt><dd>'+st+'</dd>';
+  }
+  h+=box(w.done?'green':'amber','<b>'+(w.done?'Money settled. Ready to close.':'Balance still open')+'</b><dl><dt>Renter owes</dt><dd>'+money(x.owed)+'</dd><dt>Captured from hold</dt><dd>'+money(x.captured)+'</dd><dt>Released from hold</dt><dd>'+money(x.released)+'</dd>'+b+'</dl>'+(x.link&&!w.done?'<div style="margin-top:8px">'+esc(x.link)+'</div>':'')
+   +(!w.done?'<div class="row" style="margin-top:8px">'+btn('balanceLink',x.link?'Resend Balance Link':'Send Balance Payment Link','primary',off)+(x.link?btn('balancePaid','Mark Balance Paid (simulate)','',off):'')+btn('writeOff','Write Off Balance','',off)+'</div>':''));
+ }
+ h+='<div class="row" style="margin-top:10px">'+btn('copyClaim','Copy Claim Summary')+btn('downloadClaim','Download Claim File')+'</div>';
+ return h;
+}
+function saveOutcome(t){
+ const result=$('o-result').value,note=$('o-note').value.trim(),raw=$('o-owed').value,claim=t.f.amount;
+ const owed=result==='Denied'?0:result==='Approved in full'?claim:cents(+raw);
+ let err='';
+ if(!result)err='Choose an outcome.';
+ else if(result==='Partially approved'&&!(raw!==''&&owed>0&&owed<claim))err='For a partial approval, enter an amount above $0 and below '+money(claim)+'.';
+ else if(!note)err='Add a reason or reference.';
+ if(err){$('o-err').textContent=err;$('o-err').hidden=false;return false;}
+ t.w.outcome={result,owed,note};log(t,'Outcome recorded: '+result+', renter owes '+money(owed)+'. '+note);return true;
+}
+
+/* ---------- claim toolkit ---------- */
+const GUIDE={
+ evidence:['Ask for dated pickup and return photos of the same area.','Do not charge or capture anything yet.'],
+ dispute:['Collect both sides, then record an outcome with a reason.','Do not capture while the charge is frozen.'],
+ approve:['Check the photos show new damage, then approve the settlement.','Do not charge the same damage on a second claim.'],
+ insurance:['Attach photos and an itemized estimate, then follow up until there is a decision.','Do not promise the renter or yourself an outcome.'],
+ invalid:['Enter the claimed amount.','Do not charge without an amount.']
+};
+const estimate=t=>cents((t.items||[]).reduce((n,i)=>n+i.cost,0));
+function readiness(t){
+ const ev=t.ev||{},est=estimate(t);
+ return[['Description of the damage',t.desc.trim().length>=20],['Before photo file attached',!!ev.before],['After photo file attached',!!ev.after],['Photos confirmed as Yes',t.f.photos==='Yes'],['Itemized estimate added',est>0],['Estimate matches claim amount',est>0&&est===t.f.amount]];
+}
+const openSections={ready:true};
+const sec=(key,title,html)=>'<details class="sec" data-sec="'+key+'"'+(openSections[key]?' open':'')+'><summary>'+title+'</summary><div>'+html+'</div></details>';
+const field=(id,label,attrs)=>'<div class="field"><label for="'+id+'">'+label+'</label><input id="'+id+'" '+(attrs||'')+'></div>';
+function toolkit(t){
+ const locked=t.status==='Resolved'||!!(t.w.settle||t.w.outcome),ev=t.ev||{},d=decision(t),w=t.w;
+ const g=GUIDE[d.key]||GUIDE.invalid;
+ let h=sec('guide','What should I do? (plain-language guide)','<p style="margin-top:0"><b>Why this route:</b> '+esc(d.why)+'</p><p><b>Do:</b> '+g[0]+'</p><p style="margin-bottom:0"><b>Avoid:</b> '+g[1]+'</p>');
+ const list=readiness(t),n=list.filter(x=>x[1]).length;
+ h+=sec('ready','Evidence readiness: '+n+' of '+list.length,'<ul class="check">'+list.map(x=>'<li>'+(x[1]?'✅ ':'⬜ ')+x[0]+'</li>').join('')+'</ul><div class="hint">A checklist for the operator. It does not change the routing rules or judge what a photo shows.</div>');
+ const slot=k=>{const name=k==='before'?'Before (pickup)':'After (return)';return'<div><b>'+name+'</b>'+(ev[k]?'<img alt="'+name+' evidence" src="'+esc(ev[k].src)+'"><div class="hint">Added '+when(ev[k].at)+(ev[k].sample?' · sample image':'')+'</div>':'<div class="ph">No file attached</div>')+(locked?'':'<input type="file" accept="image/*" data-photo="'+k+'" aria-label="Attach '+name+' photo">'+(ev[k]?btn('removePhoto-'+k,'Remove'):''))+'</div>';};
+ let ph='<div class="photos">'+slot('before')+slot('after')+'</div>';
+ if(!locked){
+  if(!ev.before||!ev.after)ph+='<div class="row" style="margin-top:10px">'+btn('samplePhotos','Add Sample Photos (demo)')+'</div>';
+  if(ev.before&&ev.after&&t.f.photos==='No')ph+=box('amber','Both files are attached. Look at them, then confirm they show the car before and after.<div class="row" style="margin-top:8px">'+btn('confirmPhotos','I Checked Them: Mark Photos Yes','primary')+'</div>');
+ }
+ if(t.f.photos==='Yes'&&(!ev.before||!ev.after))ph+='<div class="hint">Photos are marked Yes, but both files are not attached here.</div>';
+ h+=sec('photos','Before and after photos',ph+'<div class="hint">Photos are shrunk and kept only in this browser. Dates shown are when the file was added, not when it was taken.</div>');
+ let es=(t.items||[]).length?'<dl>'+t.items.map((i,k)=>'<dt>'+esc(i.name)+(locked?'':' <button type="button" class="chip" data-act="removeItem-'+k+'" aria-label="Remove '+esc(i.name)+'">✕</button>')+'</dt><dd>'+money(i.cost)+'</dd>').join('')+'<dt><b>Estimate total</b></dt><dd>'+money(estimate(t))+'</dd></dl>':'<div class="hint">No items yet.</div>';
+ if(!locked)es+='<div class="grid2" style="margin-top:10px">'+field('e-name','Repair item','maxlength="60" placeholder="e.g. Bumper repaint"')+field('e-cost','Cost ($)','type="number" min="0.01" step="0.01"')+'</div><div class="row">'+btn('addItem','Add Item')+(estimate(t)>0&&estimate(t)!==t.f.amount?btn('useEstimate','Use '+money(estimate(t))+' as Claim Amount','primary'):'')+'</div><div class="hint">Changing the claim amount re-runs triage and clears earlier actions.</div>';
+ h+=sec('estimate','Itemized repair estimate',es);
+ const others=sameBooking(t),car=state.tickets.filter(x=>x.id!==t.id&&x.type==='damage'&&x.vehicle===t.vehicle&&x.bookingId!==t.bookingId);
+ const row=x=>'<li><button type="button" class="chip" data-open="'+x.id+'">'+x.id+'</button> #'+esc(x.bookingId)+' · '+money(x.f.amount)+' · '+esc(x.status)+'<div class="hint">'+esc(x.desc)+'</div></li>';
+ h+=sec('history','Duplicate and damage history'+(others.length?' ⚠ '+others.length:''),(others.length?box('amber','<b>Possible duplicate:</b> this booking has another damage claim. Compare them before charging.')+'<ul class="check">'+others.map(row).join('')+'</ul>':'<div>No other damage claim on this booking.</div>')+(car.length?'<p><b>Same vehicle, other bookings</b> (could be damage that was already there):</p><ul class="check">'+car.map(row).join('')+'</ul>':''));
+ if(w.settle&&w.done&&w.settle.owed>0){
+  const a=w.appeal;let ap='';
+  if(!a)ap=field('ap-reason','Why is the renter appealing?','maxlength="200"')+btn('appeal','Log Renter Appeal');
+  else if(a.status==='open')ap=box('red','<b>Appeal open:</b> '+esc(a.reason))+field('ap-owed','New amount renter owes (0 to '+w.settle.owed+')','type="number" min="0" step="0.01" value="'+w.settle.owed+'"')+field('ap-note','Reason for the decision *','maxlength="200"')+btn('appealDecide','Save Appeal Decision','primary');
+  else ap=box(a.status==='closed'?'green':'amber','Renter owes <b>'+money(a.newOwed)+'</b>. Refund: <b>'+money(a.refund)+'</b>'+(a.refund?(a.status==='closed'?' (recorded)':' (not yet recorded)'):'')+'<div class="hint">'+esc(a.note)+'</div>')+(a.status==='refund'?btn('refund','Record Refund (simulate)','primary'):'');
+  openSections.appeal=openSections.appeal||appealOpen(t);
+  h+=sec('appeal','Renter appeal after settlement',ap+'<p class="err" id="ap-err" role="alert" hidden></p>');
+ }
+ h+=sec('help','Stuck? Prepare a note for 1Now support',field('h-question','What do you need help with?','maxlength="200" placeholder="e.g. Hold expires before insurance will answer"')+btn('helpNote','Copy Support Note','primary')+'<div class="hint">Packs the claim history into one note so you do not have to explain it twice. Nothing is sent from this demo.</div>');
+ h+=sec('pack','Evidence pack','<div class="row">'+btn('downloadPack','Download Evidence Pack')+'</div><div class="hint">One web page with the claim history, photos and recorded messages. Open it and print to PDF. It contains renter details, so share it carefully.</div>');
+ return h;
+}
+function sampleImage(t,after){
+ const c=document.createElement('canvas');c.width=480;c.height=300;const g=c.getContext('2d');
+ g.fillStyle='#E2E8F0';g.fillRect(0,0,480,300);g.fillStyle='#64748B';g.fillRect(40,90,400,120);g.fillStyle='#0F172A';[130,350].forEach(x=>{g.beginPath();g.arc(x,215,34,0,7);g.fill();});
+ if(after){g.strokeStyle='#DC2626';g.lineWidth=5;g.beginPath();g.moveTo(190,125);g.lineTo(235,150);g.lineTo(255,138);g.lineTo(305,172);g.stroke();}
+ g.fillStyle='#0F172A';g.font='bold 20px sans-serif';g.fillText('SAMPLE '+(after?'AFTER':'BEFORE')+' - not a real photo',20,40);g.font='16px sans-serif';g.fillText(t.vehicle+' / booking #'+t.bookingId,20,66);
+ return c.toDataURL('image/jpeg',.7);
+}
+function setPhoto(t,kind,photo){
+ const old=t.ev?Object.assign({},t.ev):undefined;
+ t.ev=Object.assign({},t.ev);if(photo)t.ev[kind]=photo;else delete t.ev[kind];
+ if(!save()){t.ev=old;storageOK=true;toast('Photo not saved: browser storage is full or blocked.');return false;}
+ log(t,(photo?'Attached ':'Removed ')+kind+' photo file.');save();return true;
+}
+function readPhoto(file,kind,t){
+ if(!file||!/^image\//.test(file.type))return toast('Please choose an image file.');
+ const url=URL.createObjectURL(file),img=new Image(),gen=generation;
+ img.onload=()=>{URL.revokeObjectURL(url);if(gen!==generation||t.status==='Resolved'||t.w.settle||t.w.outcome)return;
+  const k=Math.min(1,640/Math.max(img.width,img.height)),c=document.createElement('canvas');c.width=Math.max(1,Math.round(img.width*k));c.height=Math.max(1,Math.round(img.height*k));
+  const g=c.getContext('2d');g.fillStyle='#fff';g.fillRect(0,0,c.width,c.height);g.drawImage(img,0,0,c.width,c.height);
+  setPhoto(t,kind,{src:c.toDataURL('image/jpeg',.65),at:now()});if(currentId===t.id)renderLive();};
+ img.onerror=()=>{URL.revokeObjectURL(url);toast('That image could not be read. Try a JPG or PNG.');};
+ img.src=url;
+}
+const supportNote=(t,q)=>'Hi 1Now Support,\n\nI need help with a damage claim.\nQuestion: '+q+'\nNext step shown: '+nextStep(t)+'\nDeposit: '+depositStatus(t)+'\n\n'+claimSummary(t);
+function toolAction(t,a){
+ const locked=t.status==='Resolved'||!!(t.w.settle||t.w.outcome),w=t.w,err=m=>{const e=$('ap-err');e.textContent=m;e.hidden=false;};
+ const refresh=()=>{save();renderInputs(t);renderLive();};
+ if(a==='downloadPack'){
+  const pics=['before','after'].map(k=>(t.ev||{})[k]?'<figure><img style="max-width:100%" src="'+esc(t.ev[k].src)+'"><figcaption>'+k+(t.ev[k].sample?' (sample image)':'')+', added '+esc(when(t.ev[k].at))+'</figcaption></figure>':'').join('');
+  return saveFile(t.id+'-evidence-pack.html','<!DOCTYPE html><meta charset="utf-8"><title>'+t.id+' evidence pack</title><body style="font-family:sans-serif;max-width:760px;margin:24px auto;padding:0 16px"><pre style="white-space:pre-wrap">'+esc(claimSummary(t))+'</pre>'+pics+'</body>','text/html');
+ }
+ if(a==='helpNote'){const q=$('h-question').value.trim();if(!q)return toast('Type your question first.');const note=supportNote(t,q);log(t,'Support note prepared: '+q);$('h-question').value='';refresh();return copyText(note,'Support note copied. Paste it into your message to support.');}
+ if(a==='appeal'){const reason=$('ap-reason').value.trim();if(!(w.settle&&w.done&&w.settle.owed>0)||w.appeal)return;if(!reason)return err('Enter the renter\'s reason.');
+  w.appeal={reason,status:'open'};t.status='Dispute';t.stages.resolved=null;log(t,'Renter appeal logged: '+reason);return refresh();}
+ if(a==='appealDecide'){if(!w.appeal||w.appeal.status!=='open')return;const raw=$('ap-owed').value,v=cents(+raw),note=$('ap-note').value.trim(),x=w.settle;
+  if(raw===''||v<0||v>x.owed)return err('Enter an amount from $0 to '+money(x.owed)+'.');if(!note)return err('Add a reason for the decision.');
+  const collected=cents(x.captured+(x.balanceStatus==='paid'?x.balance:0)),refund=Math.max(0,cents(collected-v));
+  Object.assign(w.appeal,{newOwed:v,note,refund,status:refund?'refund':'closed'});if(!refund)t.status=decision(t).status;
+  log(t,'Appeal decided: renter owes '+money(v)+', refund '+money(refund)+'. '+note);return refresh();}
+ if(a==='refund'){if(!w.appeal||w.appeal.status!=='refund')return;return ask('Record this refund?','Record a '+money(w.appeal.refund)+' refund to the renter. (Demo only: no money moves.)','Record refund',()=>{if(w.appeal.status!=='refund')return;w.appeal.status='closed';t.status=decision(t).status;log(t,'Refund of '+money(w.appeal.refund)+' recorded (simulated).');refresh();});}
+ if(locked)return;
+ if(a==='samplePhotos'){['before','after'].forEach(k=>{if(!(t.ev||{})[k])setPhoto(t,k,{src:sampleImage(t,k==='after'),at:now(),sample:true});});return renderLive();}
+ if(a.startsWith('removePhoto-')){setPhoto(t,a.split('-')[1],null);return renderLive();}
+ if(a==='confirmPhotos'){if(!(t.ev&&t.ev.before&&t.ev.after))return;t.f.photos='Yes';log(t,'Operator checked the files and marked photos Yes.');inputsChanged(t);return refresh();}
+ if(a==='addItem'){const name=$('e-name').value.trim(),cost=cents(+$('e-cost').value);if(!name||!(cost>0))return toast('Enter an item name and a cost above $0.');(t.items=t.items||[]).push({name,cost});$('e-name').value='';$('e-cost').value='';log(t,'Estimate item added: '+name+' '+money(cost));return refresh();}
+ if(a.startsWith('removeItem-')){const gone=(t.items||[]).splice(+a.split('-')[1],1)[0];if(gone)log(t,'Estimate item removed: '+gone.name);return refresh();}
+ if(a==='useEstimate'){const total=estimate(t);if(!(total>0))return;t.f.amount=total;log(t,'Claim amount set from estimate: '+money(total));inputsChanged(t);return refresh();}
+}
+const TOOL=/^(downloadPack|helpNote|appeal|appealDecide|refund|samplePhotos|removePhoto-\w+|confirmPhotos|addItem|removeItem-\d+|useEstimate)$/;
+function claimStats(){
+ const claims=state.tickets.filter(t=>t.type==='damage'),open=claims.filter(t=>t.status!=='Resolved'),sum=(l,f)=>cents(l.reduce((n,t)=>n+f(t),0));
+ const got=t=>{const x=t.w.settle;if(!x)return 0;const a=t.w.appeal;return x.captured+(x.balanceStatus==='paid'?x.balance:0)-(a&&a.status==='closed'?a.refund:0);};
+ const atRisk=open.filter(t=>!t.w.settle&&holdLive(t)&&holdLeft(t)<=2*DAY);
+ return[[open.length,'Open claims'],[money(sum(open.filter(t=>!t.w.settle),t=>t.f.amount)),'Claimed, not yet settled'],[atRisk.length,'Holds expiring within 48h'],[money(sum(claims,got)),'Collected (demo)'],[money(sum(claims,t=>{const x=t.w.settle;return x&&(x.balanceStatus==='due'||x.balanceStatus==='link')?x.balance:0;})),'Unpaid balances'],[money(sum(claims,t=>{const x=t.w.settle;return x&&x.balanceStatus==='writtenoff'?x.balance:0;})),'Written off']];
+}
+
+/* ---------- routing rules ---------- */
+function decision(t){
+ const f=t.f;
+ if(t.type==='damage'){
+  if(f.photos==='No')return{key:'evidence',title:'NEED EVIDENCE - Cannot Charge',tone:'amber',status:'Needs Evidence',priority:'Medium',action:'Request Photos',why:'No before/after photos, so no charge is allowed yet.'};
+  if(f.disputes==='Yes')return{key:'dispute',title:'DISPUTE - Freeze Charge',tone:'red',status:'Dispute',priority:'Urgent',action:'Open Dispute Case',why:'The renter disputes the claim.'};
+  if(!(f.amount>0))return{key:'invalid',title:'Enter a damage amount above $0',tone:'amber',status:'New',priority:'Medium',action:null,why:'An amount is needed to route this claim.'};
+  if(f.amount<150)return{key:'approve',title:'AUTO-APPROVE - Deduct '+money(f.amount)+' from deposit',tone:'green',status:'Auto-Approved',priority:'Low',action:'Record '+money(f.amount)+' Deduction',why:'Photos on file, no dispute, and under $150.'};
+  return{key:'insurance',title:'ESCALATE TO INSURANCE REVIEW',tone:'red',status:'Escalated',priority:'High',action:'Send to Insurance Review',why:'Photos on file, no dispute, and $150 or more.'};
+ }
+ if(t.type==='sync')return f.backup==='Yes'
+  ?{key:'reassign',title:'AUTO-REASSIGN - Hold Backup Vehicle',tone:'green',status:'Auto-Approved',priority:'High',action:'Hold Backup Vehicle',why:'A backup vehicle is available.'}
+  :{key:'overlap',title:'ESCALATE - Direct vs. Turo Overlap',tone:'red',status:'Escalated',priority:'Urgent',action:'Escalate Overlap',why:'No backup vehicle. Keep the deposit as an authorization hold. Do not capture it.'};
+ const map={
+  lockout:['LOCKOUT - Verify booking, then try remote unlock','Urgent','Confirm the booking is active before sharing access.'],
+  payment:['PAYMENT RECOVERY - '+(f.cardOnFile==='Yes'?'Retry card on file':'Send payment link'),'High','Route depends on whether a card is on file.'],
+  late:['EXTRA CHARGE - Hours and mileage','Medium','$15 per late hour plus $0.50 per extra mile.'],
+  verify:['VERIFICATION - Re-request ID + Insurance','High','New documents are needed.']
+ }[t.type];
+ return{key:t.type,title:map[0],tone:'blue',status:'New',priority:map[1],why:map[2]};
+}
+function retriage(t){const d=decision(t);t.status=d.status;t.priority=d.priority;}
+/* a changed input cancels any earlier action */
+function inputsChanged(t){
+ const had=t.stages.action;
+ t.stages.action=null;t.w={sim:t.w.sim,checked:t.w.checked,resync:t.w.resync};delete pending[t.id];
+ retriage(t);
+ if(had)log(t,'Details changed, so the earlier action no longer applies. Review and act again.');
+}
+function act(t,text,status){t.stages.action=now();if(status)t.status=status;log(t,text);}
+const charge=f=>{const h=Math.max(0,+f.hours||0),m=Math.max(0,+f.miles||0),hc=Math.round(h*1500)/100,mc=Math.round(m*50)/100;return{h,m,hc,mc,total:Math.round((hc+mc)*100)/100};};
+
+function depositStatus(t){
+ const a=money(t.deposit);
+ if(t.type==='damage'){
+  const x=t.w.settle;
+  if(x)return a+' hold: '+(x.live?money(x.captured)+' captured, '+money(x.released)+' released':x.usedBy?'used by '+x.usedBy:'expired before capture')+(x.balance?'; balance '+(x.balanceStatus==='paid'?'paid':x.balanceStatus==='writtenoff'?'written off':'open'):'')+' (demo)';
+  if(usedBy(t))return a+' hold: already used by '+usedBy(t).id;
+  if(holdLeft(t)<=0)return a+' hold: expired';
+  const k=decision(t).key,tail=', expires in '+span(holdLeft(t));
+  return a+(k==='dispute'?' hold: charge frozen':k==='evidence'?' held: cannot charge yet':' hold: not captured')+tail;
+ }
+ if(t.type==='sync')return a+' auth hold: not captured';
+ return a+' authorization hold on record';
+}
+function nextStep(t){
+ if(t.status==='Resolved')return'Ticket is closed. No further action needed.';
+ const w=t.w,d=decision(t);
+ if(pending[t.id])return'Working on it…';
+ switch(t.type){
+  case'lockout':
+   if(!w.checked)return'Check the active booking first.';
+   if(!w.unlock)return'Booking confirmed. Try remote unlock.';
+   if(w.unlock==='success')return'Unlock worked. Confirm access, then mark as resolved.';
+   return w.roadside?'Roadside is dispatched. Resolve once the renter has access.':'Share the lockbox code. Dispatch roadside if it fails.';
+  case'payment':
+   if(w.paid)return'Payment received. Mark as resolved.';
+   if(t.f.cardOnFile==='Yes')return w.declined?'Retry was declined. Switch Card on File to No to send a link.':'Retry the payment.';
+   return w.link?'Wait for payment on the link.':'Send a payment link.';
+  case'late':return w.done?'Charge recorded. Mark as resolved.':charge(t.f).total>0?'Review the breakdown, then apply the charge.':'Enter hours late and extra miles.';
+  case'verify':return w.verified?'Documents verified. Mark as resolved.':w.requested?'Wait for the renter to upload documents.':'Re-request ID and insurance.';
+  case'damage':
+   if(appealOpen(t))return w.appeal.status==='open'?'Review the renter appeal and record a decision.':'Record the '+money(w.appeal.refund)+' refund.';
+   if(w.done)return'Money is settled. Close the ticket.';
+   if(w.settle)return w.settle.link?'Wait for the balance payment, or write it off with a reason.':'Send a payment link for the balance.';
+   if(w.outcome)return'Review the settlement preview and approve it.';
+   if(w.requested&&d.key==='evidence')return overdue(t)?((w.reminders||0)<MAX_REMINDERS?'No reply. Send a reminder.':'Still no evidence. Decide whether to drop the claim.'):'Wait for photos, then choose “Photos Received”.';
+   if(w.caseId)return'Review the evidence, then record the outcome of '+w.caseId+'.';
+   if(w.claim)return'When insurance replies, record the outcome of '+w.claim+'.';
+   if(d.key==='approve')return holdLive(t)?'Approve the deduction before the hold expires.':'No hold available. Request payment separately.';
+   return d.action?d.action+'.':d.title;
+  case'sync':
+   if(w.applied)return(d.key==='reassign'?'Backup held. ':'Escalated. ')+(w.resync?'Confirm calendars, then resolve.':'Force a calendar re-sync.');
+   return d.action+(w.resync?'.':', then force a calendar re-sync.');
+ }
+}
+
+/* ---------- renter message ---------- */
+function message(t){
+ const w=t.w,f=t.f,car=t.vehicle,first=t.customer.trim().split(/\s+/)[0];
+ let body='';
+ if(t.type==='damage'){
+  const k=decision(t).key,x=w.settle,o=w.outcome;
+  if(x){
+   if(!x.owed)body='We have closed the damage claim on the '+car+' with no charge to you.'+(x.live?' Your '+money(t.deposit)+' deposit hold is being released. Your bank decides when it disappears from your statement.':'');
+   else{
+    body='The damage claim on the '+car+' has been decided: '+money(x.owed)+' is due.';
+    if(x.captured)body+=' '+money(x.captured)+' has been deducted from your '+money(t.deposit)+' security deposit.'+(x.released?' The remaining '+money(x.released)+' of the hold is being released.':'');
+    else body+=x.usedBy?' Nothing was taken from a deposit hold for this item.':' Your deposit hold expired, so nothing was taken from it.';
+    if(x.balance)body+=x.balanceStatus==='paid'?' We received the remaining '+money(x.balance)+'. Thank you.':x.balanceStatus==='writtenoff'?' We will not collect the remaining '+money(x.balance)+'.':x.link?' Please pay the remaining '+money(x.balance)+' here: '+x.link:' The remaining '+money(x.balance)+' is still due. We will send payment details.';
+   }
+  }
+  else if(o)body='The review of the damage claim on the '+car+' is complete. '+(o.owed?'The amount due is '+money(o.owed)+'. We have not processed it yet.':'You will not be charged.');
+  else if(k==='evidence')body=w.requested?((w.reminders?'This is a reminder. ':'')+'Please reply within '+REPLY_HOURS+' hours with any before and after photos of the '+car+'. You have not been charged.'):'We are reviewing a damage report and may ask you for any before and after photos of the '+car+'. You have not been charged.';
+  else if(k==='dispute')body='We have noted that you dispute the damage claim on the '+car+'. The charge is frozen while it is reviewed.'+(w.caseId?' Your dispute case is '+w.caseId+'.':'')+' Please send any photos or notes that support your side.';
+  else if(k==='approve')body='We are reviewing a '+money(f.amount)+' damage item on the '+car+'. No deduction has been recorded yet.';
+  else if(k==='insurance')body='The damage report for the '+car+' ('+money(f.amount)+') '+(w.claim?'has been sent to insurance review (ref '+w.claim+').':'needs insurance review.')+' We will update you on the outcome.';
+  else body='We are reviewing a damage report for the '+car+'. We will confirm the details shortly.';
+ }
+ if(t.type==='lockout'){
+  if(!w.unlock)body='We know you are locked out of the '+car+'. We are '+(w.checked?'ready to try a remote unlock. Please stand next to the car.':'checking your booking now. Please stay somewhere safe.');
+  else if(w.unlock==='success')body='The '+car+' has been unlocked remotely. Please check the doors and confirm you have access.';
+  else body='The remote unlock did not work. Your backup lockbox code is '+w.code+'. Please do not share it.'+(w.roadside?' Roadside help has also been requested (ref '+w.roadside+').':' If the lockbox does not work, reply and we will arrange roadside help.');
+ }
+ if(t.type==='payment'){
+  if(w.paid)body='Your payment of '+money(f.due)+' was received. Thank you.';
+  else if(f.cardOnFile==='Yes')body=w.declined?'We retried your card for '+money(f.due)+' and it was declined. Please check with your bank or send us another way to pay.':'A payment of '+money(f.due)+' did not go through. We will retry your card on file.';
+  else body=w.link?'Please complete your payment of '+money(f.due)+' using this link: '+w.link:'A payment of '+money(f.due)+' is outstanding and we have no card on file. We will send you a payment link.';
+ }
+ if(t.type==='late'){
+  const c=charge(f);
+  body='Here is the late return and mileage summary for the '+car+':\n• Late time: '+c.h+' hr × $15 = '+money(c.hc)+'\n• Extra miles: '+c.m+' mi × $0.50 = '+money(c.mc)+'\n• Total: '+money(c.total)+'\n'+(w.done?'This charge has been recorded on your booking.':'This charge has not been applied yet.');
+ }
+ if(t.type==='verify')body=w.verified?'Your ID and insurance are now verified. Thank you.':(w.requested?'Please upload':'We could not complete verification. We will ask you to upload')+' a clear photo of your valid driver license and your current proof of insurance.';
+ if(t.type==='sync'){
+  if(decision(t).key==='reassign')body=w.applied?'There is a calendar conflict affecting your '+car+' booking. We are holding a backup vehicle for you and will confirm its details with you.':'We found a calendar conflict affecting your '+car+' booking. We are checking a backup vehicle for you.';
+  else body='We found an overlapping reservation affecting your '+car+' booking'+(w.applied?' and have escalated it to our team':' and are reviewing it')+'. Your '+money(t.deposit)+' deposit remains an authorization hold only. It has not been captured.';
+ }
+
+ const ap=w.appeal;
+ if(ap&&t.type==='damage')body+=ap.status==='open'?'\n\nWe received your appeal and are reviewing it.':'\n\nAppeal result: the amount due is now '+money(ap.newOwed)+'.'+(ap.refund?(ap.status==='closed'?' A refund of '+money(ap.refund)+' has been recorded.':' A refund of '+money(ap.refund)+' is due to you.'):'');
+ if(t.status==='Resolved'&&w.closeReason&&t.type==='damage'&&!w.settle)body='Our support request about the damage report on the '+car+' has been closed. No charge has been recorded through this request.';
+ if(t.status==='Resolved')body+='\n\nThis support request is now marked as resolved. Reply if you still need help.';
+ return'Hi '+first+',\n\n'+body+'\n\nBooking #'+t.bookingId+' · Ref '+t.id+'\nThank you,\nYour rental team';
+}
+
+/* ---------- Carisma AI assistant (offline keyword rules, not a live AI model) ---------- */
+function readText(text){
+ const s=text.toLowerCase().replace(/’/g,"'"),r={types:[],f:{},bookingId:null};
+ const words={
+  damage:[/scratch/,/\bdent/,/damage/,/crack/,/scrap(e|ed)\b/,/\bchip/,/scuff/,/broken/,/bumper/],
+  lockout:[/lock(ed)?[ -]?out/,/can(no|')t (get in|unlock|open)/,/unlock/,/keys? (are |is )?(inside|locked)/],
+  payment:[/payment/,/declin/,/(credit|debit) card/,/card on file/],
+  late:[/\blate\b/,/mileage/,/(extra|additional) miles/,/miles over/,/overdue/],
+  verify:[/verif/,/licen[cs]e/,/proof of insurance|insurance card/,/expired/,/blurry/],
+  sync:[/double[ -]?book/,/overlap/,/calendar/,/\bsync/]
+ };
+ const score=Object.keys(words).map(k=>[k,words[k].filter(x=>x.test(s)).length]).filter(x=>x[1]);
+ const top=Math.max(0,...score.map(x=>x[1]));
+ r.types=score.filter(x=>x[1]===top).map(x=>x[0]);
+ const ids=BOOKINGS.filter(b=>new RegExp('#'+b.id+'\\b').test(s)||s.includes(b.name.toLowerCase()));
+ if(ids.length===1)r.bookingId=ids[0].id;
+ const f=r.f;
+ const amounts=[...s.matchAll(/\$\s?(\d[\d,]*(?:\.\d{1,2})?)/g)].map(m=>+m[1].replace(/,/g,''));
+ if(amounts.length===1&&amounts[0]>0)f.money=amounts[0];
+ if(/\b(no|without|missing)\b[\w\s\/-]{0,20}(photo|picture)|(photo|picture)s?[\w\s]{0,15}\b(not|never|missing)\b|(haven't|didn't|did not|have not)[\w\s]{0,20}(photo|picture)/.test(s))f.photos='No';
+ else if(/(photo|picture)s?\b[\w\s]{0,25}\b(attached|on file|taken|uploaded|show)|\b(have|with)\b[\w\s\/-]{0,20}(photo|picture)/.test(s))f.photos='Yes';
+ if(/(not|n't|no longer) disput|\bno dispute|\b(accepts|accepted|agrees|agreed)\b/.test(s))f.disputes='No';
+ else if(/disput|\bdenies|\bdenied|\bdisagree|\bsays\b[^.]{0,40}(before pickup|already|not (me|them|their))/.test(s))f.disputes='Yes';
+ if(/\bno (backup|spare)|\bno other (car|vehicle)|(backup|spare)[\w\s]{0,20}(not available|unavailable)/.test(s))f.backup='No';
+ else if(/(backup|spare)( car| vehicle)?( is)? (available|ready)|\bhave a (backup|spare)/.test(s))f.backup='Yes';
+ if(/turo (booking|trip|reservation)|overlap|double[ -]?book/.test(s))f.source='Turo Booking Overlap';
+ else if(/\blag|did(n't| not) (block|update|sync)/.test(s))f.source='Calendar Sync Lag';
+ const h=s.match(/(\d+(?:\.\d+)?)\s*(?:hours?|hrs?)\s*late/)||s.match(/late by\s*(\d+(?:\.\d+)?)\s*(?:hours?|hrs?)/);
+ if(h)f.hours=+h[1];
+ const m=s.match(/(\d+)\s*(?:extra|additional)\s*miles/)||s.match(/(\d+)\s*miles over/);
+ if(m)f.miles=+m[1];
+ if(/no card on file|card (is )?not on file/.test(s))f.cardOnFile='No';
+ else if(/card (is )?on file/.test(s))f.cardOnFile='Yes';
+ return r;
+}
+const PLAYBOOK={
+ damage:['Collect before and after photos, and ask whether the renter disputes it','Check when the deposit hold expires','Route it: auto-approve under $150, otherwise insurance review or dispute','Record the outcome, settle the money, then close'],
+ lockout:['Confirm the booking is active','Try a remote unlock','If it fails, share the lockbox code, then dispatch roadside'],
+ payment:['Check for a card on file','Retry the card, or send a payment link','Close once payment is received'],
+ late:['Confirm hours late and extra miles','Review the calculated charge','Apply it and send the breakdown to the renter'],
+ verify:['Re-request ID and insurance','Wait for the upload','Verify before closing'],
+ sync:['Check for a backup vehicle','Hold the backup, or escalate and keep the deposit uncaptured','Force a re-sync and check both calendars']
+};
+/* what Carisma would put into the form; only values that differ from what is there */
+function intakeFills(){
+ const r=readText($('f-desc').value),list=[];
+ const add=(id,label,value,shown)=>{if($(id).value!==String(value))list.push({id,label,value:String(value),shown:shown||String(value),old:$(id).value});};
+ if(r.bookingId&&!$('f-booking').value){const b=BOOKINGS.find(x=>x.id===r.bookingId);add('f-booking','Booking',b.id,'#'+b.id+' '+b.vehicle+' - '+b.name);}
+ let type=$('f-type').value;
+ if(!type&&r.types.length===1){type=r.types[0];add('f-type','Problem type',type,TYPES[type][0]);}
+ if(type==='damage'){if(r.f.money)add('f-amount','Damage amount',r.f.money,money(r.f.money));if(r.f.photos)add('f-photos','Photos',r.f.photos);if(r.f.disputes)add('f-disputes','Renter disputes',r.f.disputes);}
+ if(type==='sync'){if(r.f.source)add('f-source','Conflicting source',r.f.source);if(r.f.backup)add('f-backup','Backup vehicle',r.f.backup);}
+ return{r,list,type};
+}
+function renderAssist(){
+ let h='<b>✦ Carisma AI assistant</b> <span class="hint">Simulated: offline keyword rules. Check before you submit.</span>';
+ if(!$('f-desc').value.trim())h+='<div>Describe the problem above and I will suggest what to fill in and what to do next. For example: <i>“Ali Raza scratched the bumper, $90, photos attached, he does not dispute it.”</i></div>';
+ else{
+  const{r,list,type}=intakeFills();
+  if(list.length)h+='<ul>'+list.map(x=>{const replaces=x.old&&x.id!=='f-booking'&&x.id!=='f-type';return'<li>'+esc(x.label)+': <b>'+esc(x.shown)+'</b>'+(replaces?' <span class="hint">(now “'+esc(x.old)+'”)</span>':'')+'</li>';}).join('')+'</ul>'+btn('aiFill','✨ Fill the form with these','primary');
+  if(!type){
+   h+='<div style="margin-top:6px">'+(r.types.length?'This could be more than one problem. Pick one:':'I cannot tell the problem type yet. Add more detail or choose it below.')+'</div><div class="row">'+r.types.map(k=>'<button type="button" class="chip" data-aitype="'+k+'">'+esc(TYPES[k][0])+'</button>').join('')+'</div>';
+  }else{
+   if($('f-type').value&&r.types.length===1&&r.types[0]!==type)h+='<div class="row" style="margin-top:8px">Your text sounds like '+esc(TYPES[r.types[0]][0])+'. <button type="button" class="chip" data-aitype="'+r.types[0]+'">Switch to it</button></div>';
+   h+='<div style="margin-top:8px"><b>Suggested next steps</b><ol>'+PLAYBOOK[type].map(x=>'<li>'+esc(x)+'</li>').join('')+'</ol></div>';
+  }
+ }
+ $('assist').innerHTML=h;
+}
+function aiFill(){
+ const{list}=intakeFills();
+ list.forEach(x=>{$(x.id).value=x.value;$(x.id).classList.remove('invalid');if(x.id==='f-booking')fillCustomerKeepTyped();});
+ refreshForm();
+ const more=intakeFills().list.length;
+ toast(more?'Filled. I found more details to review.':'Form filled. Please check it before submitting.');
+}
+function fillCustomerKeepTyped(){
+ const b=BOOKINGS.find(x=>x.id===$('f-booking').value);
+ if(b)['name','phone','email'].forEach(k=>{if(!$('f-'+k).value.trim())$('f-'+k).value=b[k];});
+}
+/* one-click step in the Resolver. It never fakes a reply from the renter. */
+function aiStep(t){
+ if(t.status==='Resolved'||pending[t.id])return null;
+ const w=t.w,f=t.f,d=decision(t),found=readText(t.desc).f;
+ const run=(key,label,confirm)=>({label,confirm,run:()=>{ACTIONS[key](t);}});
+ const done={label:'Mark as Resolved',run:null,resolve:true};
+ const fill=(values,label)=>({label,run:()=>{Object.assign(t.f,values);log(t,'Carisma AI filled details from the description (operator approved).');inputsChanged(t);}});
+ if(t.type==='lockout'){if(!w.checked)return run('check','Check the active booking');if(!w.unlock)return run('unlock','Try remote unlock');if(w.unlock==='success')return done;return w.roadside?null:run('roadside','Dispatch roadside','Record a roadside dispatch for this renter?');}
+ if(t.type==='payment'){
+  if(w.paid)return done;
+  const v={};if(!t.stages.action){if(found.money&&found.money!==f.due)v.due=found.money;if(found.cardOnFile&&found.cardOnFile!==f.cardOnFile)v.cardOnFile=found.cardOnFile;}
+  if(Object.keys(v).length)return fill(v,'Fill '+[v.due?'amount '+money(v.due):'',v.cardOnFile?'card on file: '+v.cardOnFile:''].filter(Boolean).join(', '));
+  if(!(f.due>0))return null;
+  if(f.cardOnFile==='Yes')return w.declined?fill({cardOnFile:'No'},'Switch to payment link'):run('retry','Retry the payment','Retry a payment of '+money(f.due)+'?');
+  return w.link?null:run('link','Create payment link');
+ }
+ if(t.type==='late'){
+  if(w.done)return done;
+  const v={};if(found.hours!==undefined&&!f.hours)v.hours=found.hours;if(found.miles!==undefined&&!f.miles)v.miles=found.miles;
+  if(Object.keys(v).length)return fill(v,'Fill '+[v.hours!==undefined?v.hours+' hours late':'',v.miles!==undefined?v.miles+' extra miles':''].filter(Boolean).join(' and '));
+  const total=charge(f).total;return total>0?run('applyCharge','Apply '+money(total)+' charge','Apply an extra charge of '+money(total)+'?'):null;
+ }
+ if(t.type==='verify'){if(w.verified)return done;return w.requested?null:run('rerequest','Re-request ID + Insurance');}
+ if(t.type==='damage'){
+  if(appealOpen(t))return null;
+  if(w.done)return done;
+  const money_=(key,label,owed)=>({label,confirm:(owed?settleText(split(t,owed)):'Nothing will be charged.')+' Most card holds allow one capture.',run:()=>ACTIONS[key](t)});
+  if(w.settle)return w.settle.link?null:run('balanceLink','Send '+money(w.settle.balance)+' balance link');
+  if(w.outcome)return money_('settle',w.outcome.owed?'Settle '+money(w.outcome.owed):'Close out with no charge',w.outcome.owed);
+  if(d.key==='evidence')return !w.requested?run('requestPhotos','Request photos'):overdue(t)&&(w.reminders||0)<MAX_REMINDERS?run('remind','Send reminder'):null;
+  if(d.key==='dispute')return w.caseId?null:run('dispute','Open dispute case');
+  if(d.key==='approve')return money_('deduct',holdLive(t)?'Deduct '+money(f.amount):'Request '+money(f.amount)+' separately',f.amount);
+  if(d.key==='insurance')return w.claim?null:run('insurance','Send to insurance review');
+  return null;
+ }
+ if(!w.applied)return run('applySync',d.action);
+ return w.resync?null:run('resync','Force calendar re-sync');
+}
+function approveAi(t){
+ const step=aiStep(t);if(!step)return;
+ if(step.resolve)return resolve(t);
+ const go=()=>{const s=aiStep(t);if(!s||s.label!==step.label)return;s.run();save();if(currentId===t.id){renderInputs(t);renderLive();}};
+ if(step.confirm)ask('Approve this step?',step.confirm+' (Demo only: nothing real happens.)','Approve',go);else go();
+}
+
+/* ---------- ui helpers ---------- */
+const TONE={'New':'blue','Needs Evidence':'amber','Awaiting Documents':'amber','Auto-Approved':'green','Resolved':'green','Escalated':'red','Dispute':'red'};
+const PTONE={Urgent:'red',High:'amber',Medium:'blue',Low:'gray'};
+const badge=(text,tone)=>'<span class="badge b-'+tone+'">'+esc(text)+'</span>';
+const when=ts=>new Date(ts).toLocaleString([], {month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'});
+let toastTimer;
+function toast(m){$('toast').textContent=m;$('toast').hidden=false;clearTimeout(toastTimer);toastTimer=setTimeout(()=>$('toast').hidden=true,3200);}
+let modalFn=null;
+function ask(title,text,yes,fn,needReason){$('m-reason-wrap').hidden=!needReason;$('m-reason').value='';$('m-err').hidden=true;$('m-title').textContent=title;$('m-text').textContent=text;$('m-yes').textContent=yes;modalFn=fn;$('modal').hidden=false;$(needReason?'m-reason':'m-yes').focus();}
+const btn=(a,label,cls,dis)=>'<button type="button" class="btn '+(cls||'')+'" data-act="'+a+'"'+(dis?' disabled':'')+'>'+esc(label)+'</button>';
+const box=(tone,html)=>'<div class="box '+tone+'">'+html+'</div>';
+const opts=(list,sel)=>list.map(o=>{const[v,l]=Array.isArray(o)?o:[o,o];return'<option value="'+esc(v)+'"'+(String(v)===String(sel)?' selected':'')+'>'+esc(l)+'</option>';}).join('');
+const sel=(k,label,list,val,dis,scope)=>'<div class="field"><label for="x-'+k+'">'+label+'</label><select id="x-'+k+'" data-'+(scope||'f')+'="'+k+'"'+(dis?' disabled':'')+'>'+opts(list,val)+'</select></div>';
+const num=(k,label,val,dis,step)=>'<div class="field"><label for="x-'+k+'">'+label+'</label><input id="x-'+k+'" type="number" min="0" step="'+(step||1)+'" data-f="'+k+'" value="'+esc(val)+'"'+(dis?' disabled':'')+'></div>';
+
+function show(name){
+ tab=name;
+ ['new','queue','resolver'].forEach(n=>$('screen-'+n).hidden=n!==name);
+ document.querySelectorAll('[data-tab]').forEach(b=>{const on=b.dataset.tab===name;b.classList.toggle('on',on);if(on)b.setAttribute('aria-current','page');else b.removeAttribute('aria-current');});
+ if(name==='queue')renderQueue();
+ if(name==='resolver')renderResolver();
+ renderCount();window.scrollTo(0,0);
+}
+function renderCount(){$('openCount').textContent=state.tickets.filter(t=>t.status!=='Resolved').length;}
+function openTicket(id){currentId=id;show('resolver');}
+
+/* ---------- intake ---------- */
+function initForm(){
+ $('f-booking').innerHTML='<option value="">Choose a booking…</option><optgroup label="Main bookings">'+BOOKINGS.slice(0,3).map(opt).join('')+'</optgroup><optgroup label="More sample bookings">'+BOOKINGS.slice(3).map(opt).join('')+'</optgroup><option value="manual">+ Add a new customer / booking</option>';
+ function opt(b){return'<option value="'+b.id+'">#'+b.id+' '+esc(b.vehicle)+' - '+esc(b.name)+'</option>';}
+ $('f-type').innerHTML='<option value="">Choose a problem…</option>'+Object.keys(TYPES).map(k=>'<option value="'+k+'">'+esc(TYPES[k][0])+'</option>').join('');
+ $('presets').innerHTML=PRESETS.map((p,i)=>'<button type="button" class="chip" data-preset="'+i+'">'+esc(p[0])+'</button>').join('');
+ refreshForm();
+}
+const bookingFromForm=()=>{
+ const v=$('f-booking').value;
+ if(v==='manual')return{id:String(state.nextBooking),vehicle:$('f-vehicle').value.trim(),deposit:+$('f-deposit').value,sync:$('f-sync').value,manual:true};
+ return BOOKINGS.find(b=>b.id===v);
+};
+const formFields=type=>type==='damage'?{amount:+$('f-amount').value,photos:$('f-photos').value,disputes:$('f-disputes').value}:type==='sync'?{source:$('f-source').value,backup:$('f-backup').value}:{};
+function refreshForm(){
+ const type=$('f-type').value,b=bookingFromForm();
+ $('manual').hidden=$('f-booking').value!=='manual';
+ $('cond-damage').hidden=type!=='damage';$('cond-sync').hidden=type!=='sync';
+ $('typeHelp').textContent=type?TYPES[type][1]:'';
+ $('summary').innerHTML=b?'<dl><dt>Booking</dt><dd>#'+b.id+(b.manual?' (new)':'')+'</dd><dt>Customer</dt><dd>'+esc($('f-name').value||'—')+'</dd><dt>Vehicle</dt><dd>'+esc(b.vehicle||'—')+'</dd><dt>Deposit Hold</dt><dd>'+money(b.deposit)+'</dd><dt>Turo Sync</dt><dd>'+badge(b.sync,b.sync==='Active'?'green':'amber')+'</dd></dl>':'<div class="hint">Choose a booking to see its details.</div>';
+ let p='<div class="hint">Choose a problem type to preview the routing.</div>';
+ if(type){
+  if(type==='damage'&&(!$('f-photos').value||!$('f-disputes').value||($('f-photos').value==='Yes'&&$('f-disputes').value==='No'&&!(+$('f-amount').value>0))))p='<div class="hint">Enter the amount and answer both questions to preview the decision. Nothing is assumed.</div>';
+  else{const d=decision({type,f:Object.assign(defaultsFor(type),formFields(type))});p=box(d.tone,'<strong>'+esc(d.title)+'</strong><div class="hint">'+esc(d.why)+'</div>')+(type==='payment'||type==='late'?'<div class="hint">You can enter the amounts on the next screen.</div>':'');}
+ }
+ $('preview').innerHTML=p;
+ renderAssist();
+}
+function fillCustomer(){
+ const b=BOOKINGS.find(x=>x.id===$('f-booking').value);
+ ['name','phone','email'].forEach(k=>$('f-'+k).value=b?b[k]:'');
+}
+function clearErrors(){$('formErr').hidden=true;document.querySelectorAll('.invalid').forEach(e=>{e.classList.remove('invalid');e.removeAttribute('aria-invalid');});}
+function resetForm(){$('form').reset();clearErrors();refreshForm();}
+function applyPreset(i){
+ const[,bid,type,desc,f]=PRESETS[i];
+ resetForm();$('f-booking').value=bid;fillCustomer();$('f-type').value=type;$('f-desc').value=desc;
+ Object.keys(f).forEach(k=>$('f-'+k).value=f[k]);
+ refreshForm();toast('Example filled in. Check it, then submit.');
+}
+function submit(e){
+ e.preventDefault();clearErrors();
+ const bad=[],need=(id,ok,label)=>{if(!ok)bad.push([id,label]);};
+ const type=$('f-type').value,manual=$('f-booking').value==='manual',email=$('f-email').value.trim();
+ need('f-booking',$('f-booking').value,'a booking');
+ if(manual){need('f-vehicle',$('f-vehicle').value.trim(),'the vehicle');need('f-deposit',+$('f-deposit').value>=150,'a deposit of $150 or more');}
+ need('f-name',$('f-name').value.trim(),'the customer name');
+ need('f-email',!email||/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email),'a valid email (or leave it empty)');
+ need('f-type',type,'a problem type');
+ need('f-desc',$('f-desc').value.trim(),'a description');
+ if(type==='damage'){need('f-amount',+$('f-amount').value>0,'a damage amount above $0');need('f-photos',$('f-photos').value,'an answer about photos');need('f-disputes',$('f-disputes').value,'an answer about a dispute');}
+ if(bad.length){
+  bad.forEach(([id])=>{$(id).classList.add('invalid');$(id).setAttribute('aria-invalid','true');});
+  $('formErr').textContent='Please add: '+bad.map(x=>x[1]).join(', ')+'.';$('formErr').hidden=false;$(bad[0][0]).focus();return;
+ }
+ const b=bookingFromForm(),holdAt=now()-(type==='damage'?+$('f-hold').value:0)*DAY;
+ if(manual)state.nextBooking++;
+ const t=makeTicket({holdAt,bookingId:b.id,vehicle:b.vehicle,deposit:b.deposit,sync:b.sync,customer:$('f-name').value.trim(),phone:$('f-phone').value.trim(),email,type,desc:$('f-desc').value.trim(),f:formFields(type)},now());
+ state.tickets.push(t);save();resetForm();openTicket(t.id);toast(t.id+' created and triaged.');
+}
+
+/* ---------- queue ---------- */
+const FILTERS=['All','New','Needs Evidence','Auto-Approved','Escalated','Dispute','Awaiting Documents','Resolved'];
+const KPIS=[['Open Tickets','Open',t=>t.status!=='Resolved'],['Escalated / Disputes','Flagged',t=>t.status==='Escalated'||t.status==='Dispute'],['Needs Evidence','Needs Evidence',t=>t.status==='Needs Evidence'],['Resolved','Resolved',t=>t.status==='Resolved']];
+const matches=t=>{const k=KPIS.find(x=>x[1]===filter);return filter==='All'||(k?k[2](t):t.status===filter);};
+function renderQueue(){
+ $('kpis').innerHTML=KPIS.map(k=>'<button class="kpi'+(filter===k[1]?' on':'')+'" data-filter="'+k[1]+'" aria-pressed="'+(filter===k[1])+'"><b>'+state.tickets.filter(k[2]).length+'</b><span>'+k[0]+'</span></button>').join('');
+ $('pills').innerHTML=FILTERS.map(s=>'<button class="pill'+(filter===s?' on':'')+'" data-filter="'+s+'" aria-pressed="'+(filter===s)+'">'+s+' ('+(s==='All'?state.tickets.length:state.tickets.filter(t=>t.status===s).length)+')</button>').join('');
+ const q=query.trim().toLowerCase();
+ const list=state.tickets.filter(t=>matches(t)&&(!q||[t.id,'#'+t.bookingId,t.customer,t.vehicle,TYPES[t.type][0],t.status,t.priority].join(' ').toLowerCase().includes(q))).sort((a,b)=>($('attention').checked?((flag(b)||{}).rank||0)-((flag(a)||{}).rank||0):0)||b.created-a.created);
+ const fl=t=>{const x=flag(t);return x?'<span class="flag '+x.cls+'">⚠ '+esc(x.text)+'</span>':'';};
+ $('rows').innerHTML=list.map(t=>'<tr tabindex="0" data-open="'+t.id+'" aria-label="Open '+t.id+'"><td data-l="Ticket"><div><b>'+t.id+'</b><small>'+when(t.created)+'</small></div></td><td data-l="Booking"><div>#'+esc(t.bookingId)+' '+esc(t.vehicle)+'<small>'+esc(t.customer)+'</small></div></td><td data-l="Problem">'+esc(TYPES[t.type][0])+'</td><td data-l="Status"><div>'+badge(t.status,TONE[t.status])+fl(t)+'</div></td><td data-l="Priority">'+badge(t.priority,PTONE[t.priority])+'</td></tr>').join('');
+ $('claimStats').innerHTML=claimStats().map(x=>'<div><b>'+x[0]+'</b><span>'+x[1]+'</span></div>').join('');
+ $('noRows').hidden=list.length>0;renderCount();
+}
+
+/* ---------- resolver ---------- */
+function renderResolver(){
+ if(!cur()){const o=state.tickets.filter(t=>t.status!=='Resolved').sort((a,b)=>b.created-a.created)[0]||state.tickets[0];currentId=o?o.id:null;}
+ const t=cur();
+ $('r-body').hidden=!t;$('r-empty').hidden=!!t;if(!t)return;
+ renderInputs(t);renderLive();
+}
+function renderInputs(t){
+ const f=t.f,off=t.status==='Resolved'||!!(t.w.settle||t.w.outcome);let h='';
+ if(t.type==='damage')h='<div class="grid3">'+num('amount','Damage Amount ($)',f.amount,off,.01)+sel('photos','Before/After Photos?',['Yes','No'],f.photos,off)+sel('disputes','Renter Disputes?',['No','Yes'],f.disputes,off)+'</div>'+(t.w.settle||t.status==='Resolved'?'':'<div class="field"><label for="x-hold">Demo setting: age of deposit hold</label><select id="x-hold">'+opts([['','Choose to change…'],['0','Placed today'],['4','Placed 4 days ago (expires soon)'],['6','Placed 6 days ago (expired)']],'')+'</select></div>');
+ if(t.type==='sync')h='<div class="grid2">'+sel('source','Conflicting Source',['Turo Booking Overlap','Calendar Sync Lag'],f.source,off)+sel('backup','Backup Vehicle Available?',['Yes','No'],f.backup,off)+'</div>';
+ if(t.type==='lockout')h=sel('sim','Demo setting: remote unlock result',[['success','Simulate success'],['fail','Simulate failure']],t.w.sim,off,'w');
+ if(t.type==='payment')h='<div class="grid3">'+num('due','Amount Due ($)',f.due,off||t.w.paid,.01)+sel('cardOnFile','Card on File?',['Yes','No'],f.cardOnFile,off||t.w.paid)+sel('sim','Demo: retry result',[['success','Approved'],['fail','Declined']],t.w.sim,off||t.w.paid,'w')+'</div>';
+ if(t.type==='late')h='<div class="grid2">'+num('hours','Hours Late',f.hours,off,.5)+num('miles','Extra Miles',f.miles,off)+'</div>';
+ $('r-inputs').innerHTML=h;
+}
+function actions(t){
+ const w=t.w,d=decision(t),busy=!!pending[t.id],off=t.status==='Resolved'||busy;let h='',b='';
+ if(t.type==='damage'){
+  if(!t.w.settle){
+   if(d.key==='evidence'){b=btn('requestPhotos',w.requested?'Photos Requested ✓':'Request Photos','primary',off||w.requested);if(w.requested)b+=btn('photosIn','Photos Received (simulate)','',off);}
+   if(d.key==='dispute'){b=btn('dispute',w.caseId?'Dispute Case Open ✓':'Open Dispute Case','primary',off||w.caseId);if(w.caseId)h=box('red','Case <b>'+esc(w.caseId)+'</b> is open. The charge stays frozen.');}
+   if(d.key==='approve'){b=btn('deduct',holdLive(t)?d.action:'Request '+money(t.f.amount)+' Separately','primary',off);h=box('','<b>Settlement preview</b><div>'+esc(settleText(split(t,t.f.amount)))+'</div>');}
+   if(d.key==='insurance'){b=btn('insurance',w.claim?'Sent to Review ✓':d.action,'primary',off||w.claim);if(w.claim)h=box('blue','Insurance review reference <b>'+esc(w.claim)+'</b>');}
+  }
+  h+=claimPanel(t);
+ }
+ if(t.type==='lockout'){
+  b=btn('check','Check Active Booking',w.checked?'':'primary',off)+btn('unlock',busy?'Unlocking…':'Try Remote Unlock',w.checked&&!w.unlock?'primary':'',off||!w.checked);
+  if(!w.checked)h='<div class="hint">Remote unlock turns on after the booking check.</div>';
+  else h=box('green','✓ Booking #'+esc(t.bookingId)+' is active (simulated): '+esc(t.customer)+', '+esc(t.vehicle)+'.');
+  if(w.unlock==='success')h+=box('green','<strong class="big">Remote unlock succeeded</strong>Confirm the renter is in. The ticket is ready to be marked resolved.');
+  if(w.unlock==='fail')h+=box('red','<strong class="big">Remote unlock failed</strong>Backup lockbox code (demo):<div class="code">'+esc(w.code)+'</div><div class="row">'+btn('roadside',w.roadside?'Roadside Dispatched ✓':'Dispatch Roadside','primary',off||w.roadside)+(w.roadside?'<span>Ref '+esc(w.roadside)+'</span>':'')+'</div>');
+ }
+ if(t.type==='payment'){
+  const ok=t.f.due>0;
+  if(t.f.cardOnFile==='Yes')b=btn('retry',busy?'Processing…':w.paid?'Paid ✓':'Retry Payment','primary',off||w.paid||!ok);
+  else{b=btn('link',w.link?'Resend Payment Link':'Send Payment Link','primary',off||w.paid||!ok);if(w.link){b+=btn('linkPaid','Mark Link Paid (simulate)','',off||w.paid);h=box('blue','Demo link status: <b>'+(w.paid?'Paid':'Sent (simulated)')+'</b><br>'+esc(w.link));}}
+  if(w.paid)h+=box('green','✓ Payment of '+money(t.f.due)+' succeeded (demo).');
+  if(w.declined&&t.f.cardOnFile==='Yes')h+=box('red','✕ Retry declined (demo). Try again, or set Card on File to No to send a link.');
+  if(!ok)h+='<p class="err">Enter an amount above $0.</p>';
+ }
+ if(t.type==='late'){
+  const c=charge(t.f);
+  h=box('blue','<div>Extra Charge = (Hours Late × $15) + (Extra Miles × $0.50)</div><dl style="margin-top:8px"><dt>'+c.h+' hr × $15.00</dt><dd>'+money(c.hc)+'</dd><dt>'+c.m+' mi × $0.50</dt><dd>'+money(c.mc)+'</dd><dt><b>Total extra charge</b></dt><dd style="font-size:20px">'+money(c.total)+'</dd></dl>');
+  b=btn('applyCharge',w.done?'Charge Recorded ✓':'Apply Charge to Ticket','primary',off||w.done||!(c.total>0));
+ }
+ if(t.type==='verify'){
+  b=btn('rerequest',w.requested?'Request Sent ✓':'Re-request ID + Insurance','primary',off||w.requested);
+  if(w.requested)b+=btn('docsIn',w.verified?'Documents Verified ✓':'Documents Verified (simulate)','',off||w.verified);
+ }
+ if(t.type==='sync'){
+  b=btn('applySync',w.applied?d.action+' ✓':d.action,'primary',off||w.applied)+btn('resync',busy?'Syncing…':'Force Turo Calendar Re-Sync','',off);
+  if(d.key==='overlap')h=box('amber','Keep the '+money(t.deposit)+' deposit as an <b>authorization hold</b>. Do not capture it.');
+  if(w.resync)h+=box('green','✓ Calendar re-sync completed (simulated) at '+when(w.resync)+'. A re-sync does not remove an existing overlap, so still check both bookings.');
+ }
+ return box(d.tone,'<span class="hint">Decision</span><strong class="big">'+esc(d.title)+'</strong>'+esc(d.why))+'<div class="row">'+b+'</div>'+h;
+}
+let drawnFor=null;
+function renderLive(){
+ const t=cur();if(!t)return;
+ const typed={};if(drawnFor===t.id)document.querySelectorAll('#r-out [id^="o-"],#r-extra [id^="e-"],#r-extra [id^="ap-"],#r-extra #h-question').forEach(el=>{if('value' in el&&el.value!==el.defaultValue)typed[el.id]=el.value;});
+ if(drawnFor!==t.id){Object.keys(openSections).forEach(k=>delete openSections[k]);openSections.ready=true;}
+ drawnFor=t.id;
+ $('r-title').textContent=t.id+' · '+TYPES[t.type][0];
+ $('r-sub').innerHTML=esc(t.customer)+' · #'+esc(t.bookingId)+' '+esc(t.vehicle)+' &nbsp;'+badge(t.status,TONE[t.status])+' '+badge(t.priority+' priority',PTONE[t.priority]);
+ $('r-pick').innerHTML=opts(state.tickets.slice().sort((a,b)=>b.created-a.created).map(x=>[x.id,x.id+' · '+x.customer]),t.id);
+ $('r-ai').innerHTML='<div class="ai-title">✦ Carisma AI Context<small>Simulated, rule-based suggestions</small></div><div><span>Deposit Hold</span><b>'+esc(depositStatus(t))+'</b></div><div><span>Two-Way Turo Sync</span><b>'+(t.sync==='Active'?'🟢 Active':'🟠 Lag Detected')+(t.w.resync?' (re-synced)':'')+'</b></div><div><span>Suggested next step</span><b>'+esc(nextStep(t))+'</b></div>'+(aiStep(t)?'<div class="go">'+btn('aiStep','✨ '+aiStep(t).label,'primary')+'<span>Carisma asks first. Nothing happens until you click.</span></div>':'');
+ $('r-timeline').innerHTML=[['Created','created'],['Triaged','triaged'],['Action Taken','action'],['Resolved','resolved']].map((s,i)=>{const at=t.stages[s[1]],done=at||(s[1]==='action'&&t.stages.resolved);return'<li class="'+(done?'done':'')+'" data-n="'+(i+1)+'">'+s[0]+'<small>'+(at?when(at):done?'Closed manually':'Pending')+'</small></li>';}).join('');
+ $('r-out').innerHTML=actions(t);
+ $('r-extra-card').hidden=t.type!=='damage';$('r-extra').innerHTML=t.type==='damage'?toolkit(t):'';
+ Object.keys(typed).forEach(id=>{if($(id))$(id).value=typed[id];});
+ const ready=(t.w.done&&!appealOpen(t))||t.w.paid||t.w.verified||t.w.unlock==='success';
+ $('r-finish').innerHTML=t.status==='Resolved'
+  ?box('green','✓ Resolved on '+when(t.stages.resolved)+'.')+'<div class="row">'+btn('reopen','Reopen Ticket')+btn('goQueue','Back to Queue','primary')+'</div>'
+  :(ready?box('green','<b>Resolve option ready.</b> The main step is complete.'):'')+'<div class="row">'+btn('resolve','Mark as Resolved','good',!!pending[t.id])+'</div>';
+ $('r-details').innerHTML='<dl><dt>Customer</dt><dd>'+esc(t.customer)+'</dd><dt>Phone</dt><dd>'+esc(t.phone||'—')+'</dd><dt>Email</dt><dd>'+esc(t.email||'—')+'</dd></dl><p style="white-space:pre-wrap;overflow-wrap:anywhere;margin-bottom:0">'+esc(t.desc)+'</p>';
+ $('msg').value=message(t);
+ $('r-log').innerHTML=t.log.slice().reverse().map(l=>'<li><time>'+when(l.at)+'</time>'+esc(l.text)+'</li>').join('');
+ renderCount();
+}
+function delayed(t,fn){
+ const token={},gen=generation;pending[t.id]=token;renderLive();
+ setTimeout(()=>{if(gen!==generation||pending[t.id]!==token)return;delete pending[t.id];fn();save();if(currentId===t.id){renderInputs(t);renderLive();}if(tab==='queue')renderQueue();},900);
+}
+const ref=p=>p+'-'+Math.floor(1000+Math.random()*9000);
+const ACTIONS={
+ requestPhotos:t=>{t.w.requested=true;t.w.reminders=0;t.w.dueAt=now()+REPLY_HOURS*3600000;act(t,'Photo request prepared for the renter (demo).','Needs Evidence');},
+ photosIn:t=>{t.f.photos='Yes';log(t,'Photos received (simulated).');inputsChanged(t);},
+ dispute:t=>{t.w.caseId=ref('DSP');act(t,'Opened dispute case '+t.w.caseId+'. Charge frozen.','Dispute');},
+ deduct:t=>{settle(t,t.f.amount);},
+ skipTime:t=>{t.w.dueAt=now();t.holdAt-=2*DAY;log(t,'Demo: skipped 48 hours with no reply.');},
+ remind:t=>{t.w.reminders=(t.w.reminders||0)+1;t.w.dueAt=now()+REPLY_HOURS*3600000;act(t,'Photo reminder '+t.w.reminders+' prepared for the renter (demo).','Needs Evidence');},
+ noEvidence:t=>{t.w.outcome={result:'Denied',owed:0,note:'No before/after evidence after '+MAX_REMINDERS+' reminders.'};log(t,'Claim dropped: no evidence.');settle(t,0);},
+ settle:t=>{if(t.w.outcome&&!t.w.settle)settle(t,t.w.outcome.owed);},
+ balanceLink:t=>{const x=t.w.settle;if(!x||t.w.done)return;x.link=x.link||'https://pay.example.com/demo/'+t.id.toLowerCase()+'-balance';x.balanceStatus='link';act(t,'Balance link for '+money(x.balance)+' marked as sent (demo).');},
+ balancePaid:t=>{const x=t.w.settle;if(!x||t.w.done)return;x.balanceStatus='paid';t.w.done=true;act(t,'Balance of '+money(x.balance)+' marked paid (simulated).');},
+ insurance:t=>{t.w.claim=ref('INS');act(t,'Sent to insurance review, ref '+t.w.claim+' (demo).','Escalated');},
+ check:t=>{t.w.checked=true;log(t,'Checked booking #'+t.bookingId+': active (simulated).');},
+ unlock:t=>delayed(t,()=>{t.w.unlock=t.w.sim==='fail'?'fail':'success';if(t.w.unlock==='fail'){t.w.code=t.w.code||String(Math.floor(1000+Math.random()*9000));act(t,'Remote unlock failed (simulated). Lockbox code revealed.');}else act(t,'Remote unlock succeeded (simulated).');}),
+ roadside:t=>{t.w.roadside=ref('RSA');act(t,'Roadside dispatch recorded, ref '+t.w.roadside+' (demo).','Escalated');},
+ retry:t=>delayed(t,()=>{if(t.w.sim==='fail'){t.w.declined=true;act(t,'Payment retry declined (simulated).');}else{t.w.declined=false;t.w.paid=true;act(t,'Payment of '+money(t.f.due)+' succeeded (simulated).');}}),
+ link:t=>{t.w.link='https://pay.example.com/demo/'+t.id.toLowerCase()+'-'+Math.random().toString(36).slice(2,8);act(t,'Payment link generated and marked as sent (demo).');},
+ linkPaid:t=>{t.w.paid=true;act(t,'Payment link marked paid (simulated).');},
+ applyCharge:t=>{t.w.done=true;act(t,'Applied extra charge of '+money(charge(t.f).total)+' (demo).');},
+ rerequest:t=>{t.w.requested=true;act(t,'Re-requested ID and insurance (demo).','Awaiting Documents');},
+ docsIn:t=>{t.w.verified=true;act(t,'ID and insurance verified (simulated).','New');},
+ applySync:t=>{t.w.applied=true;const d=decision(t);act(t,d.key==='reassign'?'Backup vehicle placed on hold (demo).':'Escalated direct vs. Turo overlap. Deposit stays as authorization hold, not captured.',d.status);},
+ resync:t=>delayed(t,()=>{t.w.resync=now();t.sync='Active';act(t,'Forced Turo calendar re-sync completed (simulated).');})
+};
+function resolve(t){
+ if(t.status==='Resolved'||pending[t.id])return;
+ const finish=reason=>{delete pending[t.id];if(reason){t.w.closeReason=reason;log(t,'Closed early. Reason: '+reason);}t.status='Resolved';t.stages.resolved=now();log(t,'Marked as Resolved.');save();renderInputs(t);renderLive();toast(t.id+' resolved.');};
+ if(appealOpen(t))return toast('Finish the renter appeal before closing this claim.');
+ const complete=t.w.done||t.w.paid||t.w.verified||t.w.unlock==='success'||t.w.roadside||(t.type==='sync'&&t.w.applied);
+ if(complete)return finish();
+ const claim=t.type!=='damage'?'':t.w.settle?' The '+money(t.w.settle.balance)+' balance is still unpaid.':' This claim has no settled outcome. Closing it records no charge'+(holdLive(t)?'; release or review the hold in your payment provider.':'.');
+ ask('Close without completing?','The main step for '+t.id+' is not complete.'+claim+' A reason is required and saved to the history.','Close ticket',finish,true);
+}
+function reopen(t){
+ t.stages.resolved=null;retriage(t);
+ const w=t.w;delete w.closeReason;
+ if(appealOpen(t))t.status='Dispute';
+ if(w.settle&&t.type==='damage')log(t,'Earlier settlement is kept. Money actions are not repeated.');
+ if(t.type==='verify'&&w.requested&&!w.verified)t.status='Awaiting Documents';
+ if(w.roadside)t.status='Escalated';
+ log(t,'Ticket reopened.');save();renderInputs(t);renderLive();
+}
+async function copyText(text,done){
+ try{await navigator.clipboard.writeText(text);toast(done);return;}catch(e){}
+ const el=document.createElement('textarea');el.value=text;document.body.appendChild(el);el.select();
+ let ok=false;try{ok=document.execCommand('copy');}catch(e){}
+ el.remove();
+ if(ok)return toast(done);
+ const m=$('msg');m.focus();m.select();toast('Copy is blocked in this browser. Use Download, or select the text and copy it.');
+}
+const copyMessage=()=>copyText($('msg').value,'Message copied.');
+function saveFile(name,text,type){
+ const url=URL.createObjectURL(new Blob([text],{type})),a=document.createElement('a');
+ a.href=url;a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);toast('File downloaded.');
+}
+const download=t=>saveFile(t.id+'-claim.txt',claimSummary(t),'text/plain');
+
+/* ---------- events ---------- */
+document.addEventListener('click',e=>{
+ const el=e.target.closest('[data-tab],[data-act],[data-filter],[data-preset],[data-aitype],[data-open]');
+ if(!el||el.disabled)return;
+ const d=el.dataset;
+ if(d.tab)return show(d.tab);
+ if(d.filter){filter=(filter===d.filter&&el.classList.contains('kpi'))?'All':d.filter;return renderQueue();}
+ if(d.preset!==undefined)return applyPreset(+d.preset);
+ if(d.aitype){$('f-type').value=d.aitype;return refreshForm();}
+ if(d.open)return openTicket(d.open);
+ const a=d.act;
+ if(a==='reset')return ask('Reset demo data?','This deletes the tickets you created and restores the sample tickets.','Reset data',()=>{generation++;Object.keys(pending).forEach(k=>delete pending[k]);seed();currentId=null;filter='All';query='';$('search').value='';$('attention').checked=false;resetForm();show('queue');toast('Demo data restored.');});
+ if(a==='modalNo'){$('modal').hidden=true;modalFn=null;return;}
+ if(a==='modalYes'){const need=!$('m-reason-wrap').hidden,reason=$('m-reason').value.trim();if(need&&!reason){$('m-err').hidden=false;return;}$('modal').hidden=true;const fn=modalFn;modalFn=null;if(fn)fn(reason);return;}
+ if(a==='clear'){resetForm();return toast('Form cleared.');}
+ if(a==='clearFilters'){filter='All';query='';$('search').value='';return renderQueue();}
+ if(a==='goNew')return show('new');
+ if(a==='aiFill')return aiFill();
+ if(a==='goQueue')return show('queue');
+ if(a==='copy')return copyMessage();
+ const t=cur();if(!t)return;
+ if(a==='resolve')return resolve(t);
+ if(a==='aiStep')return approveAi(t);
+ if(a==='copyClaim')return copyText(claimSummary(t),'Claim summary copied.');
+ if(a==='downloadClaim')return download(t);
+ if(a==='recordSent'){const text=$('msg').value;t.sent=t.sent||[];if(t.sent.length&&t.sent[t.sent.length-1].text===text)return toast('This message is already recorded.');t.sent.push({at:now(),text});log(t,'Operator recorded a renter message as sent (the app does not send it).');save();renderLive();return toast('Recorded in the history.');}
+ if(TOOL.test(a)&&t.type==='damage')return toolAction(t,a);
+ if(t.status==='Resolved'||pending[t.id])return;
+ if(a==='outcome'){if(saveOutcome(t)){save();renderInputs(t);renderLive();}return;}
+ if(a==='writeOff')return ask('Write off this balance?',money(t.w.settle.balance)+' will not be collected. A reason is required.','Write off',reason=>{const x=t.w.settle;x.balanceStatus='writtenoff';x.reason=reason;t.w.done=true;act(t,'Balance of '+money(x.balance)+' written off. Reason: '+reason);save();renderInputs(t);renderLive();},true);
+ if(a==='deduct'||a==='settle'||a==='noEvidence'){const owed=a==='deduct'?t.f.amount:a==='settle'?t.w.outcome.owed:0;
+  return ask('Approve this settlement?',(owed?settleText(split(t,owed)):'Nothing is charged'+(holdLive(t)?' and the hold is released.':'.'))+' Most card holds allow one capture. (Demo only: no money moves.)','Approve',()=>{if(t.w.settle)return;ACTIONS[a](t);save();renderInputs(t);renderLive();});}
+ if(a==='reopen')return reopen(t);
+ if(ACTIONS[a]&&t.status!=='Resolved'&&!pending[t.id]){ACTIONS[a](t);save();renderInputs(t);renderLive();}
+});
+document.addEventListener('keydown',e=>{
+ if(e.key==='Escape'&&!$('modal').hidden){$('modal').hidden=true;modalFn=null;return;}
+ const row=e.target.closest&&e.target.closest('tr[data-open]');
+ if(row&&(e.key==='Enter'||e.key===' ')){e.preventDefault();openTicket(row.dataset.open);}
+});
+$('form').addEventListener('submit',submit);
+$('form').addEventListener('input',e=>{e.target.classList.remove('invalid');e.target.removeAttribute('aria-invalid');refreshForm();});
+$('f-booking').addEventListener('change',()=>{fillCustomer();refreshForm();});
+$('attention').addEventListener('change',renderQueue);
+$('search').addEventListener('input',e=>{query=e.target.value;renderQueue();});
+$('r-inputs').addEventListener('change',e=>{const t=cur();if(!t||e.target.id!=='x-hold'||e.target.value===''||t.w.settle||t.status==='Resolved')return;t.holdAt=now()-+e.target.value*DAY;log(t,'Demo: deposit hold age set to '+e.target.value+' day(s).');save();renderLive();});
+$('r-extra').addEventListener('change',e=>{const t=cur(),k=e.target.dataset.photo;if(t&&k)readPhoto(e.target.files[0],k,t);});
+$('r-extra').addEventListener('click',e=>{const sm=e.target.closest('summary');if(sm){const d=sm.parentElement;openSections[d.dataset.sec]=!d.open;}});
+$('r-pick').addEventListener('change',e=>openTicket(e.target.value));
+$('r-inputs').addEventListener('input',e=>{
+ const t=cur(),k=e.target.dataset.f;
+ if(!t||t.status==='Resolved')return;
+ if(e.target.dataset.w){t.w[e.target.dataset.w]=e.target.value;save();return;}
+ if(!k)return;
+ const v=e.target.type==='number'?Math.max(0,Number(e.target.value)||0):e.target.value;
+ if(t.f[k]===v||t.w.settle||t.w.outcome)return;
+ if(t.type==='payment'&&t.w.paid)return;
+ t.f[k]=v;inputsChanged(t);save();renderLive();
+});
+$('r-inputs').addEventListener('change',e=>{
+ const t=cur(),k=e.target.dataset.f;if(!t||!k)return;
+ if(e.target.type==='number')e.target.value=t.f[k];
+ else log(t,'Updated '+e.target.previousElementSibling.textContent+' to '+e.target.value+'.');
+ save();renderLive();
+});
+
+load();initForm();show('new');
+</script>
+</body>
+</html>
